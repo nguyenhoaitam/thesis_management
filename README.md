@@ -10,4 +10,4 @@ __API__ Quản lý khóa luận tốt nghiệp - Bài tập lớn môn "Các cô
 - Người quản trị và giáo vụ được phép xem thống kế điểm khoá luận qua từng năm, tần suất tham gia làm khoá luận từng ngành.
 - Sau khi giáo vụ khoá hội đồng sinh viên sẽ nhận email thông báo điểm trung bình chính thức từ hội đồng.
 - Hệ thống cho phép xuất bản điểm tổng hợp các điểm trung bình của các thành viên ra file pdf phục vụ việc in và trình lãnh đạo ký.
-*Sinh viên nghiên cứu thêm dùng firebase tích hợp chat thời gian thực.
+- Sinh viên nghiên cứu thêm dùng firebase tích hợp chat thời gian thực.
