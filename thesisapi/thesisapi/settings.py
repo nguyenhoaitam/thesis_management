@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,7 +35,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'theses.apps.ThesesConfig',
+    'ckeditor',
+    'ckeditor_uploader',
+    'rest_framework',
+    'drf_yasg',
+    'oauth2_provider',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    )
+}
+
+CKEDITOR_UPLOAD_PATH = "ckeditor/images/"
+
+MEDIA_ROOT = '%s/theses/static/' % BASE_DIR
+
+AUTH_USER_MODEL = 'theses.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -69,17 +85,30 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'thesisapi.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'thesisdb',
+        'USER': 'root',
+        'PASSWORD': 'Admin@123',
+        'HOST': ''  # mặc định localhost
     }
 }
 
+import pymysql
+
+pymysql.install_as_MySQLdb()
+
+import cloudinary
+
+cloudinary.config(
+    cloud_name="dkmurrwq5",
+    api_key="258791527642274",
+    api_secret="Al4HQkF9cU5ybrgo33pIe21TZVw"
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -99,7 +128,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -111,7 +139,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -121,3 +148,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CLIENT_ID = '11kZLdmya6ZTr3cpcwG4CnFF1IlF0fDlocnUeLkz'
+CLIENT_SECRET = 'AHiCH5uqour5IHu6YE9QIepD0eSRC58gT8F0MJjEvp513olKIpGki5Iy6tpVdLUbOBkSZQjI5b8nOY5tCeRLzKWnovmIZtHZIslZbEpleaB939KssGTIpX5qS1Ibp2Wi'
