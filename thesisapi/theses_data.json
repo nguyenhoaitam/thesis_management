@@ -1,56 +1,463 @@
-[{"model": "theses.role", "pk": "admin", "fields": {"name": "Quản trị viên"}},
-  {"model": "theses.role", "pk": "lecturer", "fields": {"name": "Giảng viên"}},
-  {"model": "theses.role", "pk": "ministry", "fields": {"name": "Giáo vụ"}},
-  {"model": "theses.role", "pk": "student", "fields": {"name": "Sinh viên"}},
-  {"model": "theses.user", "pk": 1, "fields": {"password": "pbkdf2_sha256$720000$kZcCP723Xd4RXoRBQDux62$5/VbP7W5zaJEMxFMAOzSjm2U/hWG3+ou9nIkZrPlXlI=", "last_login": "2024-04-23T15:52:56.754Z", "is_superuser": true, "username": "admin", "first_name": "", "last_name": "", "email": "thesis.admin@gmail.com", "is_staff": true, "is_active": true, "date_joined": "2024-04-23T15:50:22.483Z", "avatar": "image/upload/https://res.cloudinary.com/dkmurrwq5/image/upload/v1713421473/user.png", "phone": "", "gender": "", "role": "admin", "groups": [], "user_permissions": []}},
-  {"model": "theses.user", "pk": 2, "fields": {"password": "pbkdf2_sha256$720000$sm77id8lF49vK7HRhJjkEP$AR3lSBK/emeYRM3w4CjsIiKbwuwQmmMzcHFxIv61K/0=", "last_login": null, "is_superuser": false, "username": "hoaitamsv", "first_name": "Tâm", "last_name": "Nguyễn", "email": "hoaitam.sv@gmail.com", "is_staff": false, "is_active": true, "date_joined": "2024-04-23T16:28:55Z", "avatar": "image/upload/v1713889738/xlsnzfy6yedsyir8jwdw.png", "phone": "0394873584", "gender": "male", "role": "student", "groups": [], "user_permissions": []}},
-  {"model": "theses.user", "pk": 3, "fields": {"password": "pbkdf2_sha256$720000$yINJsMGVh4KNKSGwP10i3Z$E0mBRmXpjdMntwbrwCHtWYGBTNTqUWupMc+diEbdIT0=", "last_login": null, "is_superuser": false, "username": "nhanlesv", "first_name": "Nhân", "last_name": "Lê", "email": "nhanle.sv@gmail.com", "is_staff": false, "is_active": true, "date_joined": "2024-04-23T16:30:22Z", "avatar": "image/upload/v1713889823/l8zze3ytwxj9xl8c7dgc.png", "phone": "0394873555", "gender": "male", "role": "student", "groups": [], "user_permissions": []}},
-  {"model": "theses.user", "pk": 4, "fields": {"password": "pbkdf2_sha256$720000$Vo4J2LwJURDFfkbmFNZZhm$70DN2QPYAwry7tBExHkxKpTzKtPtAsnxNowTkFdfzng=", "last_login": null, "is_superuser": false, "username": "hoangquyengv", "first_name": "Quyên", "last_name": "Phạm", "email": "hoangquyen.gv@gmail.com", "is_staff": false, "is_active": true, "date_joined": "2024-04-23T16:31:34Z", "avatar": "image/upload/v1713889895/uhox4y0ewmeoy5pv8hed.png", "phone": "0394873957", "gender": "female", "role": "lecturer", "groups": [], "user_permissions": []}},
-  {"model": "theses.user", "pk": 5, "fields": {"password": "pbkdf2_sha256$720000$cVsN058g1h6Ouqn84s4dEH$wAqxCyHbrZ1sldtqZ5yMM7O7LVFnc/Oci3YZoxANFkQ=", "last_login": null, "is_superuser": false, "username": "thienangvu", "first_name": "Ân", "last_name": "Nguyễn", "email": "annguyen.gvu@gmail.com", "is_staff": false, "is_active": true, "date_joined": "2024-04-23T16:32:53.773Z", "avatar": "image/upload/v1713889974/pbiyv8o1tfgjtq2vcj4l.png", "phone": "0394873763", "gender": "female", "role": "ministry", "groups": [], "user_permissions": []}},
-  {"model": "theses.user", "pk": 6, "fields": {"password": "pbkdf2_sha256$720000$SMZ0HRlyEOgh4xLJvVRIL2$+WHHooPRuT5Jx0rMu+PDwEpWRlngrH0i4C9evm6yJdU=", "last_login": null, "is_superuser": false, "username": "linhdangv", "first_name": "Đan", "last_name": "Nguyễn", "email": "dannguyen.gv@gmail.com", "is_staff": false, "is_active": true, "date_joined": "2024-04-24T16:38:15.232Z", "avatar": "image/upload/v1713976698/tzr2kmjpm4gyehcpkhen.png", "phone": "0394873974", "gender": "female", "role": "lecturer", "groups": [], "user_permissions": []}},
-  {"model": "theses.user", "pk": 7, "fields": {"password": "pbkdf2_sha256$720000$zlpoydq02tt8L6RtKjt3HT$oQMXsEuJ72mT6xj4YZ0H/VNf6vUIWzSXdN6ouStU2oc=", "last_login": null, "is_superuser": false, "username": "thanhdatgv", "first_name": "Đạt", "last_name": "Phạm", "email": "datpham.gv@gmail.com", "is_staff": false, "is_active": true, "date_joined": "2024-04-24T16:39:18.181Z", "avatar": "image/upload/v1713976759/p0prkr2t5djonzbiaqam.png", "phone": "0528441207", "gender": "male", "role": "lecturer", "groups": [], "user_permissions": []}},
-  {"model": "theses.user", "pk": 8, "fields": {"password": "pbkdf2_sha256$720000$jp4Xjs4jujYEFz1dSFq79W$1HOZOLr1Ketq1i9jvTHDTjEGx47QmgOkFT6Iabr+ja4=", "last_login": null, "is_superuser": false, "username": "tuankietgv", "first_name": "Kiệt", "last_name": "Phạm", "email": "kietpham.gv@gmail.com", "is_staff": false, "is_active": true, "date_joined": "2024-04-24T16:40:22.896Z", "avatar": "image/upload/https://res.cloudinary.com/dkmurrwq5/image/upload/v1713421473/user.png", "phone": "0528867125", "gender": "male", "role": "lecturer", "groups": [], "user_permissions": []}},
-  {"model": "theses.user", "pk": 9, "fields": {"password": "pbkdf2_sha256$720000$h05Rhmx0A07VXSbJqAVZI3$hKs6lyc9/dayD+r2vezO8q8n8fESpzzsJ2bJF5KpcOM=", "last_login": null, "is_superuser": false, "username": "trongnghiasv", "first_name": "Nghĩa", "last_name": "Trần", "email": "nghiatran.sv@gmail.com", "is_staff": false, "is_active": true, "date_joined": "2024-04-24T16:42:34.710Z", "avatar": "image/upload/https://res.cloudinary.com/dkmurrwq5/image/upload/v1713421473/user.png", "phone": "0528867768", "gender": "male", "role": "student", "groups": [], "user_permissions": []}},
-  {"model": "theses.user", "pk": 10, "fields": {"password": "pbkdf2_sha256$720000$h9S1VotB71exbvSEJBlTeG$AhN2rKhXgNSZG8ONnBugVN207tEaewKMbgf7SpricFE=", "last_login": null, "is_superuser": false, "username": "thanhnamsv", "first_name": "Nam", "last_name": "Trần", "email": "namtran.sv@gmail.com", "is_staff": false, "is_active":true, "date_joined": "2024-04-24T16:44:05.340Z", "avatar": "image/upload/https://res.cloudinary.com/dkmurrwq5/image/upload/v1713421473/user.png", "phone": "0527385475", "gender": "male", "role": "student", "groups": [], "user_permissions": []}},
-  {"model": "theses.user", "pk": 11, "fields": {"password": "pbkdf2_sha256$720000$uNbsHrVOizZGYueuaH6YvI$1GyG6hC5FsT0Kgop3tRgkiRVC2rZFXa3xAKeGvja2vM=", "last_login": null, "is_superuser": false, "username": "thaomysv", "first_name": "My", "last_name": "Trần", "email": "mytran.sv@gmail.com", "is_staff": false, "is_active": true, "date_joined": "2024-04-24T16:45:26.856Z", "avatar": "image/upload/https://res.cloudinary.com/dkmurrwq5/image/upload/v1713421473/user.png", "phone": "0527385789", "gender": "female", "role": "student", "groups": [], "user_permissions": []}},
-  {"model": "theses.ministry", "pk": "GVU001", "fields": {"full_name": "Nguyễn Thiên Ân", "user": 5}},
-  {"model": "theses.position", "pk": 1, "fields": {"name": "Chủ tịch"}},
-  {"model": "theses.position", "pk": 2, "fields": {"name": "Thư ký"}},
-  {"model": "theses.position", "pk": 3, "fields": {"name": "Phản biện"}},
-  {"model": "theses.position", "pk": 4, "fields": {"name": "Thành viên"}},
-  {"model": "theses.schoolyear", "pk": 1, "fields": {"name": "2021 - 2022", "start_year": "2021-01-01", "end_year": "2022-01-01"}},
-  {"model": "theses.schoolyear", "pk": 2, "fields": {"name": "2022 - 2023", "start_year": "2022-01-01", "end_year": "2023-01-01"}},
-  {"model": "theses.schoolyear", "pk": 3, "fields": {"name": "2023 - 2024", "start_year": "2023-01-01", "end_year": "2024-01-01"}},
-  {"model": "theses.schoolyear", "pk": 4, "fields": {"name": "2024 - 2025", "start_year": "2024-01-01", "end_year": "2025-01-01"}},
-  {"model": "theses.faculty", "pk": "CNSH", "fields": {"name": "Công nghệ sinh học"}},
-  {"model": "theses.faculty", "pk": "CNTT", "fields": {"name": "Công nghệ thông tin"}},
-  {"model": "theses.faculty", "pk": "DTDB", "fields": {"name": "Đào tạo đặc biệt"}},
-  {"model": "theses.faculty", "pk": "NN", "fields": {"name": "Ngoại ngữ"}},
-  {"model": "theses.faculty", "pk": "QTKD", "fields": {"name": "Quản trị kinh doanh"}},
-  {"model": "theses.faculty", "pk": "XD", "fields": {"name": "Xây dựng"}},
-  {"model": "theses.major", "pk": "CNTT", "fields": {"name": "Công nghệ thông tin", "faculty": "CNTT"}},
-  {"model": "theses.major", "pk": "HTTT", "fields": {"name": "Hệ thống thông tin quản lý", "faculty": "CNTT"}},
-  {"model": "theses.major", "pk": "KHMT", "fields": {"name": "Khoa học máy tính", "faculty": "CNTT"}},
-  {"model": "theses.major", "pk": "LGT", "fields": {"name": "Logistics & Quản lý chuỗi cung ứng", "faculty": "QTKD"}},
-  {"model": "theses.major", "pk": "MTK", "fields": {"name": "Marketing", "faculty": "QTKD"}},
-  {"model": "theses.major", "pk": "NNA", "fields": {"name": "Ngôn ngữ Anh", "faculty": "NN"}},
-  {"model": "theses.major", "pk": "NNH", "fields": {"name": "Ngôn ngữ Hàn Quốc", "faculty": "NN"}},
-  {"model": "theses.major", "pk": "NNT", "fields": {"name": "Ngôn ngữ Trung Quốc", "faculty": "NN"}},
-  {"model": "theses.major", "pk": "QTKD", "fields": {"name": "Quản trị kinh doanh", "faculty": "QTKD"}},
-  {"model": "theses.lecturer", "pk": "GV001", "fields": {"full_name": "Phạm Hoàng Quyên", "birthday": "2003-11-24","address": "Tây Ninh", "user": 4, "faculty": "NN"}},
-  {"model": "theses.lecturer", "pk": "GV002", "fields": {"full_name": "Nguyễn Linh Đan", "birthday": "1998-04-24", "address": "TP Hồ Chí Minh", "user": 6, "faculty": "NN"}},
-  {"model": "theses.lecturer", "pk": "GV003", "fields": {"full_name": "Phạm Thành Đạt", "birthday": "1995-04-05", "address": "TP Hồ Chí Minh", "user": 7, "faculty": "CNTT"}},
-  {"model": "theses.lecturer", "pk": "GV004", "fields": {"full_name": "Phạm Tuấn Kiệt", "birthday": "1990-12-13", "address": "Cần Thơ", "user":8, "faculty": "CNTT"}},
-  {"model": "theses.student", "pk": "SV001", "fields": {"full_name": "Nguyễn Hoài Tâm", "birthday": "2003-08-16", "address": "Tây Ninh", "gpa": 3.2, "user": 2, "major": "CNTT"}},
-  {"model": "theses.student", "pk": "SV002", "fields": {"full_name": "Lê Phạm Anh Nhân", "birthday": "2003-10-13", "address": "Kiên Giang", "gpa": 3.3, "user": 3, "major": "KHMT"}},
-  {"model": "theses.student", "pk": "SV003", "fields": {"full_name": "Trần Trọng Nghĩa", "birthday": "2003-08-22", "address": "TP Hồ Chí Minh", "gpa": 3.0, "user": 9, "major": "CNTT"}},
-  {"model": "theses.student", "pk": "SV004", "fields": {"full_name": "Trần Thành Nam", "birthday": "2024-07-19", "address": "Kiên Giang", "gpa": 2.9, "user": 10, "major": "NNA"}},
-  {"model": "theses.student", "pk": "SV005", "fields": {"full_name": "Trần Thảo My", "birthday": "2003-01-12", "address": "TP Hồ Chí Minh", "gpa": 3.5, "user": 11, "major": "CNTT"}},
-  {"model": "theses.council", "pk": 1, "fields": {"name": "Hội đồng 1", "description": "Hội đồng 1", "is_lock": false}},
-  {"model": "theses.council", "pk": 2,"fields": {"name": "Hội đồng 2", "description": "Hội đồng 2", "is_lock": true}},
-  {"model": "theses.council", "pk": 3, "fields": {"name": "Hội đồng 3", "description": "Hội đồng 3","is_lock": false}},
-  {"model": "theses.councildetail", "pk": 1, "fields": {"lecturer": "GV001", "council": 1, "position": 3}},
-  {"model": "theses.councildetail", "pk": 2, "fields": {"lecturer": "GV003", "council": 1, "position": 1}},
-  {"model": "theses.thesis", "pk": "KL001", "fields": {"name": "Hệ thống quản lý khóa luận tốt nghiệp", "start_date": "2024-04-01", "end_date": "2024-05-15", "report_file": null, "total_score": 0.0, "result": false, "major": "CNTT", "school_year": 3, "council": 1, "students": []}},
-  {"model": "theses.thesis", "pk": "KL002", "fields": {"name": "Xu hướng MKT trong năm 2025", "start_date": "2024-04-25", "end_date": "2024-06-25", "report_file": null, "total_score": null, "result": false, "major": "MTK", "school_year": 1, "council": 1, "students": ["SV002"]}},
-  {"model": "theses.thesis", "pk": "KL003", "fields": {"name": "Xây dựng hệ thống bán hàng online", "start_date": "2024-04-25", "end_date": "2024-06-25", "report_file": null, "total_score": null, "result": false, "major": "MTK", "school_year": 1, "council": 1, "students": ["SV003", "SV004"]}}]
+[
+    {
+        "model": "theses.role",
+        "pk": "admin",
+        "fields": {
+            "name": "Quản trị viên"
+        }
+    },
+    {
+        "model": "theses.role",
+        "pk": "lecturer",
+        "fields": {
+            "name": "Giảng viên"
+        }
+    },
+    {
+        "model": "theses.role",
+        "pk": "ministry",
+        "fields": {
+            "name": "Giáo vụ"
+        }
+    },
+    {
+        "model": "theses.role",
+        "pk": "student",
+        "fields": {
+            "name": "Sinh viên"
+        }
+    },
+    {
+        "model": "theses.user",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$wM2yKrx2Fq3qXrszGsgIPY$JFGKe8iZJj2Aprs7wn6QTbL70WG84DAUY1Pt8MfGgqs=",
+            "last_login": "2024-05-23T05:12:28.426Z",
+            "is_superuser": true,
+            "username": "admin",
+            "first_name": "",
+            "last_name": "",
+            "email": "thesisadmin@gmail.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2024-05-22T15:49:28.622Z",
+            "avatar": "image/upload/v1713421473/user.png",
+            "phone": "",
+            "gender": "",
+            "role": "admin",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$KX9HutZS7CZyZbscxe7FRj$4SWnIYRnJgCna9vBs5SPfRLuLsKeJ0FG9sSKpBFjM1s=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "thaomysv",
+            "first_name": "Trần",
+            "last_name": "My",
+            "email": "mytran.sv@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-22T15:57:51.060Z",
+            "avatar": "image/upload/v1713421473/user.png",
+            "phone": "0527385789",
+            "gender": "female",
+            "role": "student",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$YnDaNJouUo0CfTtDB4Db7W$vzogXxiShcO/DWlEa8lxzDrBgm0IiZGe21xOgMbV294=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "thanhnamsv",
+            "first_name": "Văn",
+            "last_name": "Nam",
+            "email": "namvan.sv@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-23T06:20:35.356Z",
+            "avatar": "image/upload/v1713421473/user.png",
+            "phone": "0527388577",
+            "gender": "male",
+            "role": "student",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$qsuy1IUcJi7FZPxFeBp9b0$Rg6UZi79lGjTKdXXfhxlbzVZHfoG6pw0BaEvkwVGxok=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "anhnhangv",
+            "first_name": "Lê",
+            "last_name": "Nhân",
+            "email": "nhanle.gv@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-23T06:28:47.747Z",
+            "avatar": "image/upload/v1713421473/user.png",
+            "phone": "0786896036",
+            "gender": "male",
+            "role": "lecturer",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$l31HJy5cFQh7ECiJFEPIVM$oVWFjwY2Y7ldjKxEnft9JY+Ghq5b8xcBFq0vkRKSlAA=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "hoaitamgvu",
+            "first_name": "Nguyễn",
+            "last_name": "Tâm",
+            "email": "tamnguyen.gvu@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-23T06:30:22.761Z",
+            "avatar": "image/upload/v1713421473/user.png",
+            "phone": "0394873585",
+            "gender": "male",
+            "role": "ministry",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$rqpYUls99isTZz48NZUpaK$WlnG9lP+taPhhBsM1ej2w6nh+DK2/lEu7Fvzwv+7P1g=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "hoangquyengv",
+            "first_name": "Phạm",
+            "last_name": "Quyên",
+            "email": "quyenpham.gv@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-23T06:41:38.216Z",
+            "avatar": "image/upload/v1713421473/user.png",
+            "phone": "0394873577",
+            "gender": "female",
+            "role": "lecturer",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$8SpDZYws9WvxXUUQJ2p58f$PT3lpNFYv+leRJRKZxSkkz97RFKAVU9a3Kci5PkRyMI=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "linhdangv",
+            "first_name": "Nguyễn",
+            "last_name": "Đan",
+            "email": "dannguyen.gv@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-23T06:42:48.584Z",
+            "avatar": "image/upload/v1713421473/user.png",
+            "phone": "0394873588",
+            "gender": "female",
+            "role": "lecturer",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$XAOH6eF3gDUZ5zfm5I0etK$vhuY/ctP43gQSO2lVHPSdcdfvAcLwNRmvSxPeNvDZ4E=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "trongnghiasv",
+            "first_name": "Nguyễn",
+            "last_name": "Nghĩa",
+            "email": "nghianguyen.sv@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-23T06:43:34.430Z",
+            "avatar": "image/upload/v1713421473/user.png",
+            "phone": "0394873599",
+            "gender": "male",
+            "role": "student",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$iiCmpCTPHtBAqPHYCZ7eFs$blGVxHYXFORo9VKDxZmHVe1cHwl1Pi2tSK1YjJRwOqk=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "tuankietsv",
+            "first_name": "Nguyễn",
+            "last_name": "Kiệt",
+            "email": "kietnguyen.sv@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-23T06:44:03.464Z",
+            "avatar": "image/upload/v1713421473/user.png",
+            "phone": "039487350",
+            "gender": "male",
+            "role": "student",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$Njvs0OKLqZCnkBM6fGAz5Y$NK/lW0Jl92MN+6vpn6sJOmrK+W4TRxPKSgUBQSOMCXY=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "thanhdatsv",
+            "first_name": "Phạm",
+            "last_name": "Đạt",
+            "email": "datpham.sv@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-23T06:44:56.008Z",
+            "avatar": "image/upload/v1713421473/user.png",
+            "phone": "0394873700",
+            "gender": "male",
+            "role": "student",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "fields": {
+            "password": "pbkdf2_sha256$720000$mF5t958Kgb8lkBi0blhzYj$3Xu1iK8NpgFxUni4rSet2WXvhLHlr+z0eFiIK4X/zZU=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "minhtrungsv",
+            "first_name": "Lê",
+            "last_name": "Trung",
+            "email": "trungle.sv@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-23T06:49:36.951Z",
+            "avatar": "image/upload/v1713421473/user.png",
+            "phone": "0394873722",
+            "gender": "male",
+            "role": "student",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.ministry",
+        "pk": 14,
+        "fields": {
+            "code": "GVU001",
+            "full_name": "Nguyễn Hoài Tâm",
+            "birthday": "2003-08-16",
+            "address": "Tây Ninh"
+        }
+    },
+    {
+        "model": "theses.position",
+        "pk": 1,
+        "fields": {
+            "name": "Chủ tịch"
+        }
+    },
+    {
+        "model": "theses.position",
+        "pk": 2,
+        "fields": {
+            "name": "Thư ký"
+        }
+    },
+    {
+        "model": "theses.position",
+        "pk": 3,
+        "fields": {
+            "name": "Phản biện"
+        }
+    },
+    {
+        "model": "theses.position",
+        "pk": 4,
+        "fields": {
+            "name": "Thành viên"
+        }
+    },
+    {
+        "model": "theses.schoolyear",
+        "pk": 1,
+        "fields": {
+            "name": "2021 - 2022",
+            "start_year": "2021-01-01",
+            "end_year": "2022-01-01"
+        }
+    },
+    {
+        "model": "theses.schoolyear",
+        "pk": 2,
+        "fields": {
+            "name": "2022 - 2023",
+            "start_year": "2022-01-01",
+            "end_year": "2023-01-01"
+        }
+    },
+    {
+        "model": "theses.schoolyear",
+        "pk": 3,
+        "fields": {
+            "name": "2023 - 2024",
+            "start_year": "2023-01-01",
+            "end_year": "2024-01-01"
+        }
+    },
+    {
+        "model": "theses.faculty",
+        "pk": "CNSH",
+        "fields": {
+            "name": "Công nghệ sinh học"
+        }
+    },
+    {
+        "model": "theses.faculty",
+        "pk": "CNTT",
+        "fields": {
+            "name": "Công nghệ thông tin"
+        }
+    },
+    {
+        "model": "theses.faculty",
+        "pk": "DTDB",
+        "fields": {
+            "name": "Đào tạo đặc biệt"
+        }
+    },
+    {
+        "model": "theses.faculty",
+        "pk": "NN",
+        "fields": {
+            "name": "Ngoại ngữ"
+        }
+    },
+    {
+        "model": "theses.faculty",
+        "pk": "QTKD",
+        "fields": {
+            "name": "Quản trị kinh doanh"
+        }
+    },
+    {
+        "model": "theses.faculty",
+        "pk": "XD",
+        "fields": {
+            "name": "Xây dựng"
+        }
+    },
+    {
+        "model": "theses.major",
+        "pk": "CNTT",
+        "fields": {
+            "name": "Công nghệ thông tin",
+            "faculty": "CNTT"
+        }
+    },
+    {
+        "model": "theses.major",
+        "pk": "HTTT",
+        "fields": {
+            "name": "Hệ thống thông tin quản lý",
+            "faculty": "CNTT"
+        }
+    },
+    {
+        "model": "theses.major",
+        "pk": "KHMT",
+        "fields": {
+            "name": "Khoa học máy tính",
+            "faculty": "CNTT"
+        }
+    },
+    {
+        "model": "theses.major",
+        "pk": "LGT",
+        "fields": {
+            "name": "Logistics & Quản lý chuỗi cung ứng",
+            "faculty": "QTKD"
+        }
+    },
+    {
+        "model": "theses.major",
+        "pk": "MKT",
+        "fields": {
+            "name": "Marketing",
+            "faculty": "QTKD"
+        }
+    },
+    {
+        "model": "theses.major",
+        "pk": "NNA",
+        "fields": {
+            "name": "Ngôn ngữ Anh",
+            "faculty": "NN"
+        }
+    },
+    {
+        "model": "theses.major",
+        "pk": "NNH",
+        "fields": {
+            "name": "Ngôn ngữ Hàn Quốc",
+            "faculty": "NN"
+        }
+    },
+    {
+        "model": "theses.major",
+        "pk": "NNT",
+        "fields": {
+            "name": "Ngôn ngữ Trung Quốc",
+            "faculty": "NN"
+        }
+    },
+    {
+        "model": "theses.major",
+        "pk": "QTKD",
+        "fields": {
+            "name": "Quản trị kinh doanh",
+            "faculty": "QTKD"
+        }
+    },
+    {
+        "model": "theses.lecturer",
+        "pk": 13,
+        "fields": {
+            "code": "GV001",
+            "full_name": "Lê Phạm Anh Nhân",
+            "birthday": "2003-10-13",
+            "address": "Kiên Giang",
+            "faculty": "CNTT"
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 2,
+        "fields": {
+            "code": "SV001",
+            "full_name": "Trần Thảo My",
+            "birthday": "2003-05-10",
+            "address": "TP Hồ Chí Minh",
+            "gpa": 3.2,
+            "major": "CNTT"
+        }
+    }
+]

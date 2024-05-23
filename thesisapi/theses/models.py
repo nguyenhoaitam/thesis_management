@@ -13,8 +13,18 @@ class BaseModel(models.Model):
         abstract = True
 
 
+class UserBaseModel(models.Model):
+    code = models.CharField(max_length=10, unique=True)
+    full_name = models.CharField(max_length=50, null=False)
+    birthday = models.DateField(null=False)
+    address = models.CharField(max_length=100, null=False)
+
+    class Meta:
+        abstract = True
+
+
 class Role(models.Model):  # Vai trò (Quản trị viên, Giáo vụ, Giảng viên, Sinh viên)
-    role_code = models.CharField(max_length=10, primary_key=True)
+    code = models.CharField(max_length=10, primary_key=True)
     name = models.CharField(max_length=30, unique=True, null=False)
 
     def __str__(self):
@@ -26,7 +36,7 @@ class User(AbstractUser):  # Người dùng
         ('male', 'Nam'),
         ('female', 'Nữ')
     ]
-    avatar = CloudinaryField(default='https://res.cloudinary.com/dkmurrwq5/image/upload/v1713421473/user.png')
+    avatar = CloudinaryField(null=True)
     phone = models.CharField(max_length=10, null=False)
     gender = models.CharField(max_length=10, null=False, choices=Gender_choice)
     role = models.ForeignKey(Role, on_delete=models.PROTECT)
@@ -39,23 +49,19 @@ class User(AbstractUser):  # Người dùng
 
     def save(self, *args, **kwargs):  # Hàm này có thể dùng để viết thay đổi mật khẩu
         if not self.pk and self.is_superuser:  # Kiểm tra nếu là superuser thì gán role admin
-            self.role = Role.objects.get(role_code='admin')  # Gán role là admin cho superuser mới
+            self.role = Role.objects.get(code='admin')  # Gán role là admin cho superuser mới
         super().save(*args, **kwargs)
 
+        # if not self.avatar:
+        #     self.avatar = 'image/upload/v1713421473/user.png'
+        # super().save(*args, **kwargs)
 
-class Ministry(models.Model):  # Giáo vụ
-    mi_code = models.CharField(max_length=10, primary_key=True)
-    full_name = models.CharField(max_length=50,unique=True, null=False)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+class Ministry(UserBaseModel):  # Giáo vụ
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
     def __str__(self):
         return self.full_name
-
-
-class Notify(BaseModel):  # Thông báo
-    title = models.CharField(max_length=50, null=False)
-    content = RichTextField()
-    user = models.ForeignKey(User, on_delete=models.PROTECT)
 
 
 class Position(models.Model):  # Vị trí
@@ -75,7 +81,7 @@ class SchoolYear(models.Model):  # Năm học
 
 
 class Faculty(models.Model):  # Khoa
-    fac_code = models.CharField(max_length=10, primary_key=True)
+    code = models.CharField(max_length=10, primary_key=True)
     name = models.CharField(max_length=50, null=False)
 
     def __str__(self):
@@ -83,7 +89,7 @@ class Faculty(models.Model):  # Khoa
 
 
 class Major(models.Model):  # Ngành
-    maj_code = models.CharField(max_length=10, primary_key=True)
+    code = models.CharField(max_length=10, primary_key=True)
     name = models.CharField(max_length=50, null=False)
     faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
 
@@ -94,12 +100,8 @@ class Major(models.Model):  # Ngành
         return self.faculty.name if self.faculty else None
 
 
-class Lecturer(models.Model):  # Giảng viên
-    lec_code = models.CharField(max_length=10, primary_key=True)
-    full_name = models.CharField(max_length=50, null=False)
-    birthday = models.DateField(null=False)
-    address = models.CharField(max_length=100, null=False)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class Lecturer(UserBaseModel):  # Giảng viên
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -109,13 +111,9 @@ class Lecturer(models.Model):  # Giảng viên
         return self.faculty.name if self.faculty else None
 
 
-class Student(models.Model):  # Sinh viên
-    stu_code = models.CharField(max_length=10, primary_key=True)
-    full_name = models.CharField(max_length=50, null=False)
-    birthday = models.DateField(null=False)
-    address = models.CharField(max_length=100, null=False)
+class Student(UserBaseModel):  # Sinh viên
     gpa = models.FloatField()
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     major = models.ForeignKey(Major, on_delete=models.PROTECT)
 
     def __str__(self):
@@ -141,7 +139,7 @@ class CouncilDetail(models.Model):  # Chi tiết hội đồng
 
 
 class Thesis(models.Model):  # Khóa luận
-    the_code = models.CharField(max_length=10, null=False, primary_key=True)
+    code = models.CharField(max_length=10, null=False, primary_key=True)
     name = models.CharField(max_length=200, null=False)
     start_date = models.DateField()
     end_date = models.DateField()

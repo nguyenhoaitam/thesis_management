@@ -22,10 +22,10 @@ class UserViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.DestroyAPIV
         if self.action in ['current_user']:
             return [perms.IsAuthenticated()]
 
-        return [perms.IsAdmin()]
+        return [permissions.AllowAny()]
 
     # Lấy thông tin User đang chứng thực, cập nhật thông tin User
-    @action(methods=['get', 'patch'], url_path='current_user', detail=False)
+    @action(methods=['get', 'patch'], url_path='current-user', detail=False)
     def current_user(self, request):
         user = request.user
         if request.method.__eq__('PATCH'):
@@ -221,6 +221,8 @@ class CouncilViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIV
         council.save()
         return Response({'is_lock': council.is_lock}, status=status.HTTP_200_OK)
 
+    # Xử lý send mail khi hội đồng khóa
+
 
 # Chi tiết hội đồng
 class CouncilDetailViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIView, generics.DestroyAPIView):
@@ -258,7 +260,17 @@ class ThesisViewSet(viewsets.ViewSet, generics.ListCreateAPIView):
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
 
+    # Tính điểm tổng của KL
+
+    # Xử lý khi thêm khóa luận, hội đồng bv đã quá 5 KL thì tbao lỗi + gán 2 giảng viên
+
+
 # Giảng viên hướng dẫn khóa luận
+class InstructorViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIView):
+    queryset = Instructor.objects.all()
+    serializer_class = serializers.InstructorSerializer
+    parser_classes = [parsers.MultiPartParser, ]
+
 # Điểm
 # Cột điểm
 # Điểm thành phần

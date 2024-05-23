@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-8z+4f(4os-me**dqd11=1ap5^v&4b4gv#ds23$n-e-8bv$0g4)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.1.12']
 
 # Application definition
 
@@ -54,6 +54,8 @@ CKEDITOR_UPLOAD_PATH = "ckeditor/images/"
 MEDIA_ROOT = '%s/theses/static/' % BASE_DIR
 
 AUTH_USER_MODEL = 'theses.User'
+
+# OAUTH2_PROVIDER = {'OAUTH2_BACKEND_CLASS': 'oauth2_provider.oauth2_backends.JSONOAuthLibCore'}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -149,6 +151,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-CLIENT_ID = '11kZLdmya6ZTr3cpcwG4CnFF1IlF0fDlocnUeLkz'
-CLIENT_SECRET = 'AHiCH5uqour5IHu6YE9QIepD0eSRC58gT8F0MJjEvp513olKIpGki5Iy6tpVdLUbOBkSZQjI5b8nOY5tCeRLzKWnovmIZtHZIslZbEpleaB939KssGTIpX5qS1Ibp2Wi'
+CLIENT_ID = 'raLOPdSRcjjZZ6GayaO0Z5mKLWdc3qzDiV2OrKNM'
+CLIENT_SECRET = '3tLQNOpzys13Fk0li8ZqHnygjluhvAxc5tptVfAPfTem41H02CppNS2dqSp52ngMeqHgmCXSzePadGsqvZbfW5MlvPlW3Fnc4z1p9OIZF6MPFje7HCYU81AwjUOJn2MO'

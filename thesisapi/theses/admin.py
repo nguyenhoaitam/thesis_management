@@ -1,13 +1,14 @@
+from cloudinary.templatetags import cloudinary
 from django.contrib import admin
-from django.utils.safestring import mark_safe
+from django.utils.html import mark_safe
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
-from theses.models import Role, User, Ministry, Notify, Position, SchoolYear, Faculty, Major, \
+from theses.models import Role, User, Ministry, Position, SchoolYear, Faculty, Major, \
     Lecturer, Student, Council, CouncilDetail, Thesis, Instructor, Score, ScoreComponent, ScoreColumn, ScoreDetail
 
 
 class MyRoleAdmin(admin.ModelAdmin):
-    list_display = ['role_code', 'name']
+    list_display = ['code', 'name']
 
 
 class MyUserAdmin(admin.ModelAdmin):
@@ -15,29 +16,19 @@ class MyUserAdmin(admin.ModelAdmin):
                     'avatar', 'phone', 'gender', 'role_name', 'is_active']
     search_fields = ['username', 'first_name', 'last_name']
     list_filter = ['gender', 'role_id']
-    readonly_fields = ['my_avatar']
+    readonly_fields = ['user_avatar']
 
-    def my_avatar(self, user):  # Xem lại đường dẫn
+    def user_avatar(self, user):
         if user.avatar:
-            return mark_safe(f"<img src='/static/{user.avatar.name}' width='200' />")
+            if type(user.avatar) is cloudinary.CloudinaryResource:
+                return mark_safe(f"<img width='100' src='{user.avatar.url}' />")
+            return mark_safe(f"<img width='100' src='/static/{user.avatar.name}' />")
+        else:
+            return "No avatar"
 
 
 class MyMinistryAdmin(admin.ModelAdmin):
-    pass
-
-
-class NotifyForm(forms.ModelForm):
-    content = forms.CharField(widget=CKEditorUploadingWidget)
-
-    class Meta:
-        model = Notify
-        fields = '__all__'
-
-
-class MyNotifyAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user_id', 'title', 'content', 'created_date', 'active']
-    search_fields = ['title', 'content']
-    form = NotifyForm
+    list_display = ['code', 'full_name', 'birthday', 'address', 'user']
 
 
 class MyPositionAdmin(admin.ModelAdmin):
@@ -50,25 +41,25 @@ class MySchoolYearAdmin(admin.ModelAdmin):
 
 
 class MyFacultyAdmin(admin.ModelAdmin):
-    list_display = ['fac_code', 'name']
-    search_fields = ['fac_code', 'name']
+    list_display = ['code', 'name']
+    search_fields = ['code', 'name']
 
 
 class MyMajorAdmin(admin.ModelAdmin):
-    list_display = ['maj_code', 'name', 'faculty_name']
-    search_fields = ['maj_code', 'name']
+    list_display = ['code', 'name', 'faculty_name']
+    search_fields = ['code', 'name']
     list_filter = ['faculty']
 
 
 class MyLecturerAdmin(admin.ModelAdmin):
-    list_display = ['lec_code', 'full_name', 'birthday', 'address', 'faculty_name', 'user_id']
-    search_fields = ['lec_code', 'full_name']
+    list_display = ['code', 'full_name', 'birthday', 'address', 'faculty_name', 'user_id']
+    search_fields = ['code', 'full_name']
     list_filter = ['faculty']
 
 
 class MyStudentAdmin(admin.ModelAdmin):
-    list_display = ['stu_code', 'full_name', 'birthday', 'address', 'gpa', 'user_id', 'major_name']
-    search_fields = ['stu_code', 'full_name']
+    list_display = ['code', 'full_name', 'birthday', 'address', 'gpa', 'user_id', 'major_name']
+    search_fields = ['code', 'full_name']
     list_filter = ['major']
 
 
@@ -82,7 +73,7 @@ class MyCouncilDetailAdmin(admin.ModelAdmin):
 
 
 class MyThesisAdmin(admin.ModelAdmin):
-    list_display = ['the_code', 'name', 'start_date', 'end_date', 'total_score', 'result', 'major_name']
+    list_display = ['code', 'name', 'start_date', 'end_date', 'total_score', 'result', 'major_name']
     search_fields = ['name', 'major_name']
     list_filter = ['major', 'school_year']
 
@@ -113,8 +104,7 @@ class MyScoreDetailAdmin(admin.ModelAdmin):
 
 admin.site.register(Role, MyRoleAdmin)
 admin.site.register(User, MyUserAdmin)
-admin.site.register(Ministry)
-admin.site.register(Notify, MyNotifyAdmin)
+admin.site.register(Ministry, MyMinistryAdmin)
 admin.site.register(Position, MyPositionAdmin)
 admin.site.register(SchoolYear, MySchoolYearAdmin)
 admin.site.register(Faculty, MyFacultyAdmin)
