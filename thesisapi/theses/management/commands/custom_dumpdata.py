@@ -45,7 +45,7 @@ class Command(BaseCommand):
         for model in models:
             model_name = model._meta.label
             buffer = StringIO()
-            call_command('dumpdata', model_name, use_natural_foreign_keys=True, use_natural_primary_keys=True, stdout=buffer)
+            call_command('dumpdata', model_name, indent=4, stdout=buffer)  # Loại bỏ các tùy chọn use_natural_foreign_keys và use_natural_primary_keys
             buffer.seek(0)
             data = json.load(buffer)
             if isinstance(data, list):

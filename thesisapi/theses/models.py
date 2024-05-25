@@ -33,8 +33,8 @@ class Role(models.Model):  # Vai trò (Quản trị viên, Giáo vụ, Giảng v
 
 class User(AbstractUser):  # Người dùng
     Gender_choice = [
-        ('male', 'Nam'),
-        ('female', 'Nữ')
+        ('Nam', 'Nam'),
+        ('Nữ', 'Nữ')
     ]
     avatar = CloudinaryField(null=True)
     phone = models.CharField(max_length=10, null=False)
@@ -143,13 +143,14 @@ class Thesis(models.Model):  # Khóa luận
     name = models.CharField(max_length=200, null=False)
     start_date = models.DateField()
     end_date = models.DateField()
-    report_file = RichTextField(null=True)  # File báo cáo
+    report_file = RichTextField(null=True, blank=True)  # File báo cáo
     total_score = models.FloatField(null=True, default=0)
     result = models.BooleanField(default=False)
     major = models.ForeignKey(Major, on_delete=models.PROTECT)
     school_year = models.ForeignKey(SchoolYear, on_delete=models.PROTECT)
-    council = models.ForeignKey(Council, on_delete=models.PROTECT)
-    students = models.ManyToManyField(Student, null=True, blank=False)  # Nhiều sinh viên ()
+    council = models.ForeignKey(Council, on_delete=models.PROTECT, null=True, blank=True)
+    student = models.ForeignKey(Student, on_delete=models.PROTECT, null=True, blank=True)
+    lecturers = models.ManyToManyField(Lecturer, null=True, blank=True)  # Giảng viên hướng dẫn khóa luận (Tối đa 2)
 
     # Hàm tính điểm TB
 
@@ -158,11 +159,6 @@ class Thesis(models.Model):  # Khóa luận
 
     def major_name(self):
         return self.major.name if self.major else None
-
-
-class Instructor(models.Model):  # Giảng viên hướng dẫn khóa luận (Tối đa 2)
-    lecturer = models.ForeignKey(Lecturer, on_delete=models.PROTECT)
-    thesis = models.ForeignKey(Thesis, on_delete=models.PROTECT)
 
 
 class Score(models.Model):  # Điểm

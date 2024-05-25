@@ -1,10 +1,11 @@
 from cloudinary.templatetags import cloudinary
 from django.contrib import admin
+from django.contrib.auth.hashers import make_password
 from django.utils.html import mark_safe
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from theses.models import Role, User, Ministry, Position, SchoolYear, Faculty, Major, \
-    Lecturer, Student, Council, CouncilDetail, Thesis, Instructor, Score, ScoreComponent, ScoreColumn, ScoreDetail
+    Lecturer, Student, Council, CouncilDetail, Thesis, Score, ScoreComponent, ScoreColumn, ScoreDetail
 
 
 class MyRoleAdmin(admin.ModelAdmin):
@@ -17,6 +18,13 @@ class MyUserAdmin(admin.ModelAdmin):
     search_fields = ['username', 'first_name', 'last_name']
     list_filter = ['gender', 'role_id']
     readonly_fields = ['user_avatar']
+
+    # Băm mật khẩu khi tạo bằng admin
+    def save_model(self, request, obj, form, change):
+        if not change:
+            # Nếu đây là việc tạo mới người dùng
+            obj.password = make_password(form.cleaned_data['password'])
+        super().save_model(request, obj, form, change)
 
     def user_avatar(self, user):
         if user.avatar:
@@ -73,13 +81,9 @@ class MyCouncilDetailAdmin(admin.ModelAdmin):
 
 
 class MyThesisAdmin(admin.ModelAdmin):
-    list_display = ['code', 'name', 'start_date', 'end_date', 'total_score', 'result', 'major_name']
+    list_display = ['code', 'name', 'start_date', 'end_date', 'total_score', 'result', 'major_name', 'student']
     search_fields = ['name', 'major_name']
     list_filter = ['major', 'school_year']
-
-
-class MyInstructorAdmin():
-    pass
 
 
 class MyScoreAdmin(admin.ModelAdmin):
@@ -114,7 +118,6 @@ admin.site.register(Student, MyStudentAdmin)
 admin.site.register(Council, MyCouncilAdmin)
 admin.site.register(CouncilDetail)
 admin.site.register(Thesis, MyThesisAdmin)
-admin.site.register(Instructor)
 admin.site.register(Score)
 admin.site.register(ScoreComponent, MyScoreComponentAdmin)
 admin.site.register(ScoreColumn, MyScoreColumnAdmin)

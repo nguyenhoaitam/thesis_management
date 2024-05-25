@@ -115,7 +115,7 @@ class MajorSerializer(serializers.ModelSerializer):
 class LecturerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lecturer
-        fields = ['code', 'full_name', 'birthday', 'address', 'user', 'faculty_name']
+        fields = '__all__'
 
 
 # Sinh viên
@@ -141,18 +141,18 @@ class CouncilDetailSerializer(serializers.ModelSerializer):
 
 # Khóa luận
 class ThesisSerializer(serializers.ModelSerializer):
-    # major = MajorSerializer()
+    lecturers = serializers.SerializerMethodField()
+    # lecturers = LecturerSerializer(many=True)
+
+    def get_lecturers(self, obj):
+        lecturers_queryset = obj.lecturers.all()
+        return LecturerSerializer(lecturers_queryset, many=True).data
+
     class Meta:
         model = Thesis
         fields = ['code', 'name', 'start_date', 'end_date', 'report_file',
-                  'total_score', 'result', 'council', 'major', 'school_year', 'students']
+                  'total_score', 'result', 'council', 'major', 'school_year', 'student', 'lecturers']
 
-
-# Giảng viên hướng dẫn khóa luận
-class InstructorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Instructor
-        fields = '__all__'
 
 # Điểm
 

@@ -29,6 +29,7 @@
     },
     {
         "model": "theses.user",
+        "pk": 1,
         "fields": {
             "password": "pbkdf2_sha256$720000$wM2yKrx2Fq3qXrszGsgIPY$JFGKe8iZJj2Aprs7wn6QTbL70WG84DAUY1Pt8MfGgqs=",
             "last_login": "2024-05-23T05:12:28.426Z",
@@ -50,6 +51,7 @@
     },
     {
         "model": "theses.user",
+        "pk": 2,
         "fields": {
             "password": "pbkdf2_sha256$720000$KX9HutZS7CZyZbscxe7FRj$4SWnIYRnJgCna9vBs5SPfRLuLsKeJ0FG9sSKpBFjM1s=",
             "last_login": null,
@@ -63,7 +65,7 @@
             "date_joined": "2024-05-22T15:57:51.060Z",
             "avatar": "image/upload/v1713421473/user.png",
             "phone": "0527385789",
-            "gender": "female",
+            "gender": "Nữ",
             "role": "student",
             "groups": [],
             "user_permissions": []
@@ -71,6 +73,7 @@
     },
     {
         "model": "theses.user",
+        "pk": 3,
         "fields": {
             "password": "pbkdf2_sha256$720000$YnDaNJouUo0CfTtDB4Db7W$vzogXxiShcO/DWlEa8lxzDrBgm0IiZGe21xOgMbV294=",
             "last_login": null,
@@ -84,7 +87,7 @@
             "date_joined": "2024-05-23T06:20:35.356Z",
             "avatar": "image/upload/v1713421473/user.png",
             "phone": "0527388577",
-            "gender": "male",
+            "gender": "Nam",
             "role": "student",
             "groups": [],
             "user_permissions": []
@@ -92,6 +95,7 @@
     },
     {
         "model": "theses.user",
+        "pk": 13,
         "fields": {
             "password": "pbkdf2_sha256$720000$qsuy1IUcJi7FZPxFeBp9b0$Rg6UZi79lGjTKdXXfhxlbzVZHfoG6pw0BaEvkwVGxok=",
             "last_login": null,
@@ -105,7 +109,7 @@
             "date_joined": "2024-05-23T06:28:47.747Z",
             "avatar": "image/upload/v1713421473/user.png",
             "phone": "0786896036",
-            "gender": "male",
+            "gender": "Nam",
             "role": "lecturer",
             "groups": [],
             "user_permissions": []
@@ -113,6 +117,7 @@
     },
     {
         "model": "theses.user",
+        "pk": 14,
         "fields": {
             "password": "pbkdf2_sha256$720000$l31HJy5cFQh7ECiJFEPIVM$oVWFjwY2Y7ldjKxEnft9JY+Ghq5b8xcBFq0vkRKSlAA=",
             "last_login": null,
@@ -126,7 +131,7 @@
             "date_joined": "2024-05-23T06:30:22.761Z",
             "avatar": "image/upload/v1713421473/user.png",
             "phone": "0394873585",
-            "gender": "male",
+            "gender": "Nam",
             "role": "ministry",
             "groups": [],
             "user_permissions": []
@@ -134,6 +139,7 @@
     },
     {
         "model": "theses.user",
+        "pk": 15,
         "fields": {
             "password": "pbkdf2_sha256$720000$rqpYUls99isTZz48NZUpaK$WlnG9lP+taPhhBsM1ej2w6nh+DK2/lEu7Fvzwv+7P1g=",
             "last_login": null,
@@ -147,7 +153,7 @@
             "date_joined": "2024-05-23T06:41:38.216Z",
             "avatar": "image/upload/v1713421473/user.png",
             "phone": "0394873577",
-            "gender": "female",
+            "gender": "Nữ",
             "role": "lecturer",
             "groups": [],
             "user_permissions": []
@@ -155,6 +161,7 @@
     },
     {
         "model": "theses.user",
+        "pk": 16,
         "fields": {
             "password": "pbkdf2_sha256$720000$8SpDZYws9WvxXUUQJ2p58f$PT3lpNFYv+leRJRKZxSkkz97RFKAVU9a3Kci5PkRyMI=",
             "last_login": null,
@@ -168,7 +175,7 @@
             "date_joined": "2024-05-23T06:42:48.584Z",
             "avatar": "image/upload/v1713421473/user.png",
             "phone": "0394873588",
-            "gender": "female",
+            "gender": "Nữ",
             "role": "lecturer",
             "groups": [],
             "user_permissions": []
@@ -176,6 +183,7 @@
     },
     {
         "model": "theses.user",
+        "pk": 17,
         "fields": {
             "password": "pbkdf2_sha256$720000$XAOH6eF3gDUZ5zfm5I0etK$vhuY/ctP43gQSO2lVHPSdcdfvAcLwNRmvSxPeNvDZ4E=",
             "last_login": null,
@@ -189,7 +197,7 @@
             "date_joined": "2024-05-23T06:43:34.430Z",
             "avatar": "image/upload/v1713421473/user.png",
             "phone": "0394873599",
-            "gender": "male",
+            "gender": "Nam",
             "role": "student",
             "groups": [],
             "user_permissions": []
@@ -197,6 +205,7 @@
     },
     {
         "model": "theses.user",
+        "pk": 18,
         "fields": {
             "password": "pbkdf2_sha256$720000$iiCmpCTPHtBAqPHYCZ7eFs$blGVxHYXFORo9VKDxZmHVe1cHwl1Pi2tSK1YjJRwOqk=",
             "last_login": null,
@@ -210,7 +219,7 @@
             "date_joined": "2024-05-23T06:44:03.464Z",
             "avatar": "image/upload/v1713421473/user.png",
             "phone": "039487350",
-            "gender": "male",
+            "gender": "Nam",
             "role": "student",
             "groups": [],
             "user_permissions": []
@@ -218,6 +227,7 @@
     },
     {
         "model": "theses.user",
+        "pk": 19,
         "fields": {
             "password": "pbkdf2_sha256$720000$Njvs0OKLqZCnkBM6fGAz5Y$NK/lW0Jl92MN+6vpn6sJOmrK+W4TRxPKSgUBQSOMCXY=",
             "last_login": null,
@@ -231,7 +241,7 @@
             "date_joined": "2024-05-23T06:44:56.008Z",
             "avatar": "image/upload/v1713421473/user.png",
             "phone": "0394873700",
-            "gender": "male",
+            "gender": "Nam",
             "role": "student",
             "groups": [],
             "user_permissions": []
@@ -239,8 +249,9 @@
     },
     {
         "model": "theses.user",
+        "pk": 20,
         "fields": {
-            "password": "pbkdf2_sha256$720000$mF5t958Kgb8lkBi0blhzYj$3Xu1iK8NpgFxUni4rSet2WXvhLHlr+z0eFiIK4X/zZU=",
+            "password": "pbkdf2_sha256$720000$TnqUUMtCpVnJ13MyzqHi7I$pDiPd2pVKBCjsHdnAEMd9gyJThzrlg44Dr/okvRFij8=",
             "last_login": null,
             "is_superuser": false,
             "username": "minhtrungsv",
@@ -250,9 +261,9 @@
             "is_staff": false,
             "is_active": true,
             "date_joined": "2024-05-23T06:49:36.951Z",
-            "avatar": "image/upload/v1713421473/user.png",
-            "phone": "0394873722",
-            "gender": "male",
+            "avatar": "image/upload/v1716530019/m3puyopbhpw2uveqdwc0.png",
+            "phone": "0123597547",
+            "gender": "Nam",
             "role": "student",
             "groups": [],
             "user_permissions": []
@@ -449,6 +460,28 @@
         }
     },
     {
+        "model": "theses.lecturer",
+        "pk": 15,
+        "fields": {
+            "code": "GV002",
+            "full_name": "Phạm Hoàng Quyên",
+            "birthday": "2003-11-24",
+            "address": "Tây Ninh",
+            "faculty": "NN"
+        }
+    },
+    {
+        "model": "theses.lecturer",
+        "pk": 16,
+        "fields": {
+            "code": "GV003",
+            "full_name": "Nguyễn Linh Đan",
+            "birthday": "2003-05-02",
+            "address": "TP Hồ Chí Minh",
+            "faculty": "CNTT"
+        }
+    },
+    {
         "model": "theses.student",
         "pk": 2,
         "fields": {
@@ -458,6 +491,122 @@
             "address": "TP Hồ Chí Minh",
             "gpa": 3.2,
             "major": "CNTT"
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 3,
+        "fields": {
+            "code": "SV002",
+            "full_name": "Văn Thành Nam",
+            "birthday": "2003-10-01",
+            "address": "Tây Ninh",
+            "gpa": 3.0,
+            "major": "CNTT"
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 17,
+        "fields": {
+            "code": "SV003",
+            "full_name": "Nguyễn Trọng Nghĩa",
+            "birthday": "2003-01-24",
+            "address": "Cần Thơ",
+            "gpa": 2.9,
+            "major": "KHMT"
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 18,
+        "fields": {
+            "code": "SV004",
+            "full_name": "Nguyễn Tuấn Kiệt",
+            "birthday": "2003-09-14",
+            "address": "TP Hồ Chí Minh",
+            "gpa": 3.35,
+            "major": "NNA"
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 19,
+        "fields": {
+            "code": "SV005",
+            "full_name": "Phạm Thành Đạt",
+            "birthday": "2003-12-29",
+            "address": "TP Hồ Chí Minh",
+            "gpa": 3.9,
+            "major": "NNA"
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 20,
+        "fields": {
+            "code": "SV006",
+            "full_name": "Lê Minh Trung",
+            "birthday": "2003-05-02",
+            "address": "Tây Ninh",
+            "gpa": 2.7,
+            "major": "LGT"
+        }
+    },
+    {
+        "model": "theses.council",
+        "pk": 1,
+        "fields": {
+            "name": "Hội đồng 1",
+            "description": "<p>Hội đồng 1</p>",
+            "is_lock": true
+        }
+    },
+    {
+        "model": "theses.councildetail",
+        "pk": 1,
+        "fields": {
+            "lecturer": 13,
+            "council": 1,
+            "position": 1
+        }
+    },
+    {
+        "model": "theses.councildetail",
+        "pk": 3,
+        "fields": {
+            "lecturer": 16,
+            "council": 1,
+            "position": 2
+        }
+    },
+    {
+        "model": "theses.councildetail",
+        "pk": 4,
+        "fields": {
+            "lecturer": 15,
+            "council": 1,
+            "position": 3
+        }
+    },
+    {
+        "model": "theses.thesis",
+        "pk": "KL001",
+        "fields": {
+            "name": "Hệ thống quản lý khóa luận tốt nghiệp",
+            "start_date": "2024-04-18",
+            "end_date": "2024-07-18",
+            "report_file": "",
+            "total_score": 0.0,
+            "result": false,
+            "major": "CNTT",
+            "school_year": 3,
+            "council": 1,
+            "student": 2,
+            "lecturers": [
+                13,
+                15
+            ]
         }
     }
 ]

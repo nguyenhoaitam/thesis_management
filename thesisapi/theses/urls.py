@@ -41,9 +41,6 @@ r.register('council_details', views.CouncilDetailViewSet, 'council_details')
 # Khóa luận
 r.register('theses', views.ThesisViewSet, 'theses')
 
-# Giảng viên hướng dẫn khóa luận
-r.register('instructors', views.InstructorViewSet, 'instructors')
-
 # Điểm
 
 # Cột điểm
