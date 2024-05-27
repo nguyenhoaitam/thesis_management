@@ -13,10 +13,9 @@ class MyRoleAdmin(admin.ModelAdmin):
 
 
 class MyUserAdmin(admin.ModelAdmin):
-    list_display = ['id', 'username', 'first_name', 'last_name', 'email',
-                    'avatar', 'phone', 'gender', 'role_name', 'is_active']
+    list_display = ['id', 'username', 'first_name', 'last_name', 'email', 'phone', 'gender', 'role']
     search_fields = ['username', 'first_name', 'last_name']
-    list_filter = ['gender', 'role_id']
+    list_filter = ['gender', 'role']
     readonly_fields = ['user_avatar']
 
     # Băm mật khẩu khi tạo bằng admin
@@ -54,19 +53,19 @@ class MyFacultyAdmin(admin.ModelAdmin):
 
 
 class MyMajorAdmin(admin.ModelAdmin):
-    list_display = ['code', 'name', 'faculty_name']
+    list_display = ['code', 'name', 'faculty']
     search_fields = ['code', 'name']
     list_filter = ['faculty']
 
 
 class MyLecturerAdmin(admin.ModelAdmin):
-    list_display = ['code', 'full_name', 'birthday', 'address', 'faculty_name', 'user_id']
+    list_display = ['code', 'full_name', 'birthday', 'address', 'faculty', 'user_id']
     search_fields = ['code', 'full_name']
     list_filter = ['faculty']
 
 
 class MyStudentAdmin(admin.ModelAdmin):
-    list_display = ['code', 'full_name', 'birthday', 'address', 'gpa', 'user_id', 'major_name']
+    list_display = ['code', 'full_name', 'birthday', 'address', 'gpa', 'user_id', 'major']
     search_fields = ['code', 'full_name']
     list_filter = ['major']
 
@@ -74,15 +73,17 @@ class MyStudentAdmin(admin.ModelAdmin):
 class MyCouncilAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'description', 'is_lock']
     search_fields = ['name']
+    list_filter = ['is_lock']
 
 
 class MyCouncilDetailAdmin(admin.ModelAdmin):
-    list_display = ['id', 'lecturer_id', 'council_id', 'position_id']
+    list_display = ['id', 'lecturer', 'council', 'position']
+    list_filter = ['council']
 
 
 class MyThesisAdmin(admin.ModelAdmin):
-    list_display = ['code', 'name', 'start_date', 'end_date', 'total_score', 'result', 'major_name', 'student']
-    search_fields = ['name', 'major_name']
+    list_display = ['code', 'name', 'start_date', 'end_date', 'total_score', 'result', 'major', 'student']
+    search_fields = ['name', 'major']
     list_filter = ['major', 'school_year']
 
 
@@ -116,7 +117,7 @@ admin.site.register(Major, MyMajorAdmin)
 admin.site.register(Lecturer, MyLecturerAdmin)
 admin.site.register(Student, MyStudentAdmin)
 admin.site.register(Council, MyCouncilAdmin)
-admin.site.register(CouncilDetail)
+admin.site.register(CouncilDetail, MyCouncilDetailAdmin)
 admin.site.register(Thesis, MyThesisAdmin)
 admin.site.register(Score)
 admin.site.register(ScoreComponent, MyScoreComponentAdmin)

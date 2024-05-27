@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 from cloudinary.models import CloudinaryField
+from rest_framework.exceptions import ValidationError
 
 
 class BaseModel(models.Model):
@@ -43,9 +44,6 @@ class User(AbstractUser):  # Người dùng
 
     def has_role(self, required_role):  # Hàm kiểm tra quyền của User
         return self.role == required_role
-
-    def role_name(self):
-        return self.role.name if self.role else None
 
     def save(self, *args, **kwargs):  # Hàm này có thể dùng để viết thay đổi mật khẩu
         if not self.pk and self.is_superuser:  # Kiểm tra nếu là superuser thì gán role admin
@@ -96,9 +94,6 @@ class Major(models.Model):  # Ngành
     def __str__(self):
         return self.name
 
-    def faculty_name(self):
-        return self.faculty.name if self.faculty else None
-
 
 class Lecturer(UserBaseModel):  # Giảng viên
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -106,9 +101,6 @@ class Lecturer(UserBaseModel):  # Giảng viên
 
     def __str__(self):
         return self.full_name
-
-    def faculty_name(self):
-        return self.faculty.name if self.faculty else None
 
 
 class Student(UserBaseModel):  # Sinh viên
@@ -118,9 +110,6 @@ class Student(UserBaseModel):  # Sinh viên
 
     def __str__(self):
         return self.full_name
-
-    def major_name(self):
-        return self.major.name if self.major else None
 
 
 class Council(models.Model):  # Hội đồng
@@ -156,9 +145,6 @@ class Thesis(models.Model):  # Khóa luận
 
     def __str__(self):
         return self.name
-
-    def major_name(self):
-        return self.major.name if self.major else None
 
 
 class Score(models.Model):  # Điểm

@@ -4,14 +4,11 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from theses.models import *
 from theses import serializers, paginators, perms
+from django.core.mail import EmailMessage
+from django.conf import settings
 
 
 # Vai trò (Quản lý trong Admin)
-class RoleViewSet(viewsets.ViewSet, generics.ListAPIView):
-    queryset = Role.objects.all()
-    serializer_class = serializers.RoleSerializer
-    permission_classes = [perms.IsAdmin]
-
 
 # Người dùng
 class UserViewSet(viewsets.ViewSet, generics.CreateAPIView):
@@ -50,6 +47,7 @@ class UserViewSet(viewsets.ViewSet, generics.CreateAPIView):
 class PositionViewSet(viewsets.ViewSet, generics.ListAPIView):
     queryset = Position.objects.all()
     serializer_class = serializers.PositionSerializer
+    pagination_class = paginators.BasePaginator
 
 
 # Năm học (Quản lý trong Admin, Giáo vụ)
@@ -58,6 +56,7 @@ class SchoolYearViewSet(viewsets.ViewSet, generics.CreateAPIView,
     queryset = SchoolYear.objects.all()
     serializer_class = serializers.SchoolYearSerializer
     parser_classes = [parsers.MultiPartParser]
+    pagination_class = paginators.BasePaginator
 
     # permission_classes = [perms.IsAdmin]
 
@@ -165,13 +164,40 @@ class LecturerViewSet(viewsets.ViewSet, generics.ListAPIView):
     # Lấy hội đồng mà giảng viên tham gia
     @action(detail=True, methods=['get'], url_path='councils')
     def get_councils(self, request, pk=None):
-        try:
-            lecturer = self.get_object()
-            councils = Council.objects.filter(councildetail__lecturer=lecturer)
-            serializer = serializers.CouncilSerializer(councils, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except Lecturer.DoesNotExist:
-            return Response({"Lỗi": "Giảng viên không tồn tại!"}, status=status.HTTP_404_NOT_FOUND)
+        # try:
+        #     lecturer = self.get_object()
+        #     councils = Council.objects.filter(councildetail__lecturer=lecturer)
+        #     serializer = serializers.CouncilSerializer(councils, many=True)
+        #     return Response(serializer.data, status=status.HTTP_200_OK)
+        # except Lecturer.DoesNotExist:
+        #     return Response({"Lỗi": "Giảng viên không tồn tại!"}, status=status.HTTP_404_NOT_FOUND)
+
+        lecturer = self.get_object()
+        council_details = CouncilDetail.objects.filter(lecturer=lecturer).select_related('council', 'position')
+        serializer = serializers.CouncilDetailSerializer(council_details, many=True)
+        return Response(serializer.data)
+
+    # Lấy khóa luận mà giảng viên hướng dẫn
+    @action(detail=True, methods=['get'])
+    def theses(self, request, pk=None):
+        lecturer = self.get_object()
+        theses = Thesis.objects.filter(lecturers=lecturer)
+        serializer = serializers.ThesisSerializer(theses, many=True)
+        return Response(serializer.data)
+
+    # Lấy khóa luận giảng viên phản biện
+    @action(detail=True, methods=['get'])
+    def theses_review(self, request, pk=None):
+        lecturer = self.get_object()
+        review_positions = Position.objects.filter(name__icontains='Phản biện')
+        council_details = CouncilDetail.objects.filter(lecturer=lecturer, position__in=review_positions).select_related(
+            'council')
+        council_ids = council_details.values_list('council_id', flat=True)
+        theses = Thesis.objects.filter(council_id__in=council_ids).select_related('major', 'school_year', 'council',
+                                                                                  'student').prefetch_related(
+            'lecturers')
+        serializer = serializers.ThesisSerializer(theses, many=True)
+        return Response(serializer.data)
 
 
 # Sinh Viên
@@ -215,6 +241,7 @@ class CouncilViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIV
     queryset = Council.objects.all()
     serializer_class = serializers.CouncilSerializer
     parser_classes = [parsers.MultiPartParser]
+    pagination_class = paginators.BasePaginator
     # permission_classes = [perms.IsMinistry]
 
     def get_queryset(self):
@@ -355,22 +382,42 @@ class CouncilDetailViewSet(viewsets.ViewSet, generics.ListAPIView, generics.Dest
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             council_detail = serializer.save()
+
+            # Sau khi lưu chi tiết của hội đồng thành công
+            if position.id == 3:  # Nếu giảng viên được gán là phản biện
+                lecturer_email = lecturer.user.email
+                council_name = council.name
+                subject = f'Bạn đã được giao làm phản biện cho hội đồng "{council_name}"'
+                message = (
+                    f'Chào mừng bạn đã được giao vai trò phản biện cho hội đồng "{council_name}".\n'
+                    'Vui lòng chuẩn bị và liên hệ với các thành viên khác trong hội đồng để hoàn thành nhiệm vụ của mình.\n'
+                    '__Giáo vụ__'
+                )
+
+                from_email = 'Thesis Management <{}>'.format(settings.DEFAULT_FROM_EMAIL)
+
+                # Gửi email thông báo cho giảng viên
+                email = EmailMessage(subject, message, from_email, to=[lecturer_email])
+                email.send()
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # Xử lý gửi email/sms khi gán giảng viên phản biện
-
 
 # Khóa luận
-class ThesisViewSet(viewsets.ViewSet, generics.ListCreateAPIView):
+class ThesisViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.RetrieveAPIView):
     queryset = Thesis.objects.prefetch_related('lecturers').all()
     serializer_class = serializers.ThesisSerializer
     parser_classes = [parsers.MultiPartParser, ]
+    pagination_class = paginators.ThesisPaginator
 
     # permission_classes = [perms.IsAuthenticated]
 
     def list(self, request):
         queryset = self.get_queryset()
+
+        paginator = self.pagination_class()
+        result_page = paginator.paginate_queryset(queryset, request)
 
         # Lọc theo các tham số truy vấn
         q = request.query_params.get('q')
@@ -387,8 +434,16 @@ class ThesisViewSet(viewsets.ViewSet, generics.ListCreateAPIView):
         if school_year_id:
             queryset = queryset.filter(school_year_id=school_year_id)
 
-        serializer = self.serializer_class(queryset, many=True)
-        return Response(serializer.data)
+        serializer = self.serializer_class(result_page, many=True)
+        return paginator.get_paginated_response(serializer.data)
+
+    # def create(self, request):
+    #     # Lấy ID của sinh viên từ dữ liệu yêu cầu POST
+    #     student_id = request.data.get('student_id')
+    #
+    #     # Kiểm tra xem sinh viên đã tham gia khóa luận nào trước đó hay không
+    #     if Thesis.objects.filter(student_id=student_id).exists():
+    #         raise PermissionDenied("Sinh viên đã tham gia một khóa luận trước đó và không thể tạo khóa luận mới.")
 
     # Thêm giảng viên hướng dẫn vào khóa luận
     @action(detail=True, methods=['post'], url_path='add_lecturer')

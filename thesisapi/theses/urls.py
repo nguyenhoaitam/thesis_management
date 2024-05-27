@@ -4,8 +4,7 @@ from rest_framework import routers
 from theses import views
 
 r = routers.DefaultRouter()
-# Vai trò
-r.register('roles', views.RoleViewSet, 'roles')
+# Vai trò (Quản lý trong Admin)
 
 # Người dùng
 r.register('users', views.UserViewSet, 'users')

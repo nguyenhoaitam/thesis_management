@@ -156,5 +156,14 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Cấu hình gửi email sử dụng máy chủ SMTP của Gmail
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'nguyenhoaitam16082003@gmail.com'
+EMAIL_HOST_PASSWORD = 'drjmxgzlxvebbtda'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 CLIENT_ID = 'raLOPdSRcjjZZ6GayaO0Z5mKLWdc3qzDiV2OrKNM'
 CLIENT_SECRET = '3tLQNOpzys13Fk0li8ZqHnygjluhvAxc5tptVfAPfTem41H02CppNS2dqSp52ngMeqHgmCXSzePadGsqvZbfW5MlvPlW3Fnc4z1p9OIZF6MPFje7HCYU81AwjUOJn2MO'

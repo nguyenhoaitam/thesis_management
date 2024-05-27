@@ -2,11 +2,7 @@ from rest_framework import serializers
 from theses.models import *
 
 
-# Vai trò
-class RoleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Role
-        fields = '__all__'
+# Vai trò (Quản lý trong Admin)
 
 
 # Người dùng
@@ -38,23 +34,25 @@ class UserSerializer(serializers.ModelSerializer):
             return None
 
     def to_representation(self, instance):
-        req = super().to_representation(instance)
+        rep = super().to_representation(instance)
+
+        rep['role'] = instance.role.name if instance.role else None
 
         avatar = getattr(instance, 'avatar', None)
         if avatar:
-            req['avatar'] = instance.avatar.url
+            rep['avatar'] = instance.avatar.url
 
         # Loại bỏ trường student, lecturer, ministry nếu không tồn tại
-        if req.get('student') is None:
-            req.pop('student')
+        if rep.get('student') is None:
+            rep.pop('student')
 
-        if req.get('lecturer') is None:
-            req.pop('lecturer')
+        if rep.get('lecturer') is None:
+            rep.pop('lecturer')
 
-        if req.get('ministry') is None:
-            req.pop('ministry')
+        if rep.get('ministry') is None:
+            rep.pop('ministry')
 
-        return req
+        return rep
 
     def create(self, validated_data):
         data = validated_data.copy()
@@ -108,14 +106,26 @@ class FacultySerializer(serializers.ModelSerializer):
 class MajorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Major
-        fields = ['code', 'name', 'faculty_name']
+        fields = ['code', 'name', 'faculty']
+
+    # Trả về tên khoa khi GET
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['faculty'] = instance.faculty.name if instance.faculty else None
+        return rep
 
 
 # Giảng viên
 class LecturerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lecturer
-        fields = '__all__'
+        fields = ['code', 'full_name', 'birthday', 'address', 'faculty']
+
+    # Trả về tên khoa khi GET
+    def to_representation(self, instance): # to_representation được ghi đè để thay đổi cách hiển thị
+        rep = super().to_representation(instance)
+        rep['faculty'] = instance.faculty.name if instance.faculty else None
+        return rep
 
 
 # Sinh viên
@@ -124,40 +134,87 @@ class StudentSerializer(serializers.ModelSerializer):
         model = Student
         fields = ['code', 'full_name', 'birthday', 'address', 'gpa', 'user', 'major']
 
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['major'] = instance.major.name if instance.major else None
+        return rep
+
 
 # Hội đồng
 class CouncilSerializer(serializers.ModelSerializer):
     class Meta:
         model = Council
-        fields = '__all__'
+        fields = ['id', 'name', 'description', 'is_lock']
 
 
 # Chi tiết hội đồng
 class CouncilDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = CouncilDetail
-        fields = '__all__'
+        fields = ['id', 'lecturer', 'council', 'position']
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['lecturer'] = instance.lecturer.full_name if instance.lecturer else None
+        rep['council'] = instance.council.name if instance.council else None
+        rep['position'] = instance.position.name if instance.position else None
+        return rep
 
 
 # Khóa luận
 class ThesisSerializer(serializers.ModelSerializer):
     lecturers = serializers.SerializerMethodField()
-    # lecturers = LecturerSerializer(many=True)
+    reviewer = serializers.SerializerMethodField()
 
     def get_lecturers(self, obj):
         lecturers_queryset = obj.lecturers.all()
         return LecturerSerializer(lecturers_queryset, many=True).data
 
+    def get_reviewer(self, obj):
+        if obj.council:
+            reviewer_detail = obj.council.councildetail_set.filter(position__name='Phản biện').first()
+            if reviewer_detail:
+                return LecturerSerializer(reviewer_detail.lecturer).data
+        return None
+
     class Meta:
         model = Thesis
         fields = ['code', 'name', 'start_date', 'end_date', 'report_file',
-                  'total_score', 'result', 'council', 'major', 'school_year', 'student', 'lecturers']
+                  'total_score', 'result', 'council', 'major',
+                  'school_year', 'student', 'lecturers', 'reviewer']
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['council'] = instance.council.name if instance.council else None
+        rep['major'] = instance.major.name if instance.major else None
+        rep['school_year'] = instance.school_year.name if instance.school_year else None
+        rep['student'] = instance.student.full_name if instance.student else None
+        return rep
 
 
 # Điểm
+class ScoreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Score
+        fields = '__all__'
+
 
 # Cột điểm
+class ScoreColumnSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ScoreColumn
+        fields = '__all__'
+
 
 # Điểm thành phần
+class ScoreComponentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ScoreComponent
+        fields = '__all__'
+
 
 # Chi tiết điểm
+class ScoreDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ScoreDetail
+        fields = '__all__'
