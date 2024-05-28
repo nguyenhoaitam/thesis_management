@@ -81,10 +81,10 @@
             "username": "thanhnamsv",
             "first_name": "Văn",
             "last_name": "Nam",
-            "email": "namvan.sv@gmail.com",
+            "email": "bibi0110990@gmail.com",
             "is_staff": false,
             "is_active": true,
-            "date_joined": "2024-05-23T06:20:35.356Z",
+            "date_joined": "2024-05-23T06:20:35Z",
             "avatar": "image/upload/v1713421473/user.png",
             "phone": "0527388577",
             "gender": "Nam",
@@ -103,10 +103,10 @@
             "username": "anhnhangv",
             "first_name": "Lê",
             "last_name": "Nhân",
-            "email": "nhanle.gv@gmail.com",
+            "email": "nhan13101970@gmail.com",
             "is_staff": false,
             "is_active": true,
-            "date_joined": "2024-05-23T06:28:47.747Z",
+            "date_joined": "2024-05-23T06:28:47Z",
             "avatar": "image/upload/v1713421473/user.png",
             "phone": "0786896036",
             "gender": "Nam",
@@ -147,10 +147,10 @@
             "username": "hoangquyengv",
             "first_name": "Phạm",
             "last_name": "Quyên",
-            "email": "quyenpham.gv@gmail.com",
+            "email": "phamhoangquyen2411@gmail.com",
             "is_staff": false,
             "is_active": true,
-            "date_joined": "2024-05-23T06:41:38.216Z",
+            "date_joined": "2024-05-23T06:41:38Z",
             "avatar": "image/upload/v1713421473/user.png",
             "phone": "0394873577",
             "gender": "Nữ",
@@ -169,10 +169,10 @@
             "username": "linhdangv",
             "first_name": "Nguyễn",
             "last_name": "Đan",
-            "email": "dannguyen.gv@gmail.com",
+            "email": "hoaitam8998@gmail.com",
             "is_staff": false,
             "is_active": true,
-            "date_joined": "2024-05-23T06:42:48.584Z",
+            "date_joined": "2024-05-23T06:42:48Z",
             "avatar": "image/upload/v1713421473/user.png",
             "phone": "0394873588",
             "gender": "Nữ",
@@ -270,6 +270,72 @@
         }
     },
     {
+        "model": "theses.user",
+        "pk": 39,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$jClAdoIiDSKyYXy3oFKFeX$DFFj0ElgfoLqodlLiFDVLCyoIWtZf8SRZCYq3keDN6A=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "hoaitamgv",
+            "first_name": "Nguyễn",
+            "last_name": "Tâm",
+            "email": "hoaitam8998@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-26T13:50:02Z",
+            "avatar": "image/upload/v1716731447/kalg6zijmxshno3xnvrv.png",
+            "phone": "0394873584",
+            "gender": "Nam",
+            "role": "lecturer",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "pk": 40,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$mwtS4BFKpWKU5Ej1bUiJ8E$rJXqF+fJVsvGt3mCkD57ZPH9o7LrcN7T2JIyGG+lR3Y=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "hoaitamsv",
+            "first_name": "Nguyễn",
+            "last_name": "Tâm",
+            "email": "tam37458@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-26T16:36:22Z",
+            "avatar": "image/upload/v1716741416/vnmdt1kpjnqmtbpuvtha.png",
+            "phone": "0394873584",
+            "gender": "Nam",
+            "role": "student",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "pk": 41,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$FyNfFJ5TYZTnVVihAm2mmM$uPhUqBgAVrQ/By6pslAvEWy3hEIWTsaTpzZApEtu/EQ=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "nhanlesv",
+            "first_name": "Lê",
+            "last_name": "Nhân",
+            "email": "2151050293nhan@ou.edu.vn",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-26T16:37:43Z",
+            "avatar": "image/upload/v1716741567/ktwpgh9vqre6fcqsl1un.jpg",
+            "phone": "0786896036",
+            "gender": "Nam",
+            "role": "student",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
         "model": "theses.ministry",
         "pk": 14,
         "fields": {
@@ -357,6 +423,20 @@
     },
     {
         "model": "theses.faculty",
+        "pk": "KTKT",
+        "fields": {
+            "name": "Kế toán kiểm toán"
+        }
+    },
+    {
+        "model": "theses.faculty",
+        "pk": "L",
+        "fields": {
+            "name": "Luật"
+        }
+    },
+    {
+        "model": "theses.faculty",
         "pk": "NN",
         "fields": {
             "name": "Ngoại ngữ"
@@ -367,6 +447,20 @@
         "pk": "QTKD",
         "fields": {
             "name": "Quản trị kinh doanh"
+        }
+    },
+    {
+        "model": "theses.faculty",
+        "pk": "TCNH",
+        "fields": {
+            "name": "Tài chính ngân hàng"
+        }
+    },
+    {
+        "model": "theses.faculty",
+        "pk": "XCD",
+        "fields": {
+            "name": "XHH - CTXH - DNA"
         }
     },
     {
@@ -394,6 +488,14 @@
     },
     {
         "model": "theses.major",
+        "pk": "KET",
+        "fields": {
+            "name": "Kế toán",
+            "faculty": "KTKT"
+        }
+    },
+    {
+        "model": "theses.major",
         "pk": "KHMT",
         "fields": {
             "name": "Khoa học máy tính",
@@ -402,10 +504,34 @@
     },
     {
         "model": "theses.major",
+        "pk": "KIT",
+        "fields": {
+            "name": "Kiểm toán",
+            "faculty": "KTKT"
+        }
+    },
+    {
+        "model": "theses.major",
+        "pk": "L",
+        "fields": {
+            "name": "Luật",
+            "faculty": "L"
+        }
+    },
+    {
+        "model": "theses.major",
         "pk": "LGT",
         "fields": {
             "name": "Logistics & Quản lý chuỗi cung ứng",
             "faculty": "QTKD"
+        }
+    },
+    {
+        "model": "theses.major",
+        "pk": "LKT",
+        "fields": {
+            "name": "Luật kinh tế",
+            "faculty": "L"
         }
     },
     {
@@ -449,6 +575,14 @@
         }
     },
     {
+        "model": "theses.major",
+        "pk": "XHH",
+        "fields": {
+            "name": "Xã hội học",
+            "faculty": "XCD"
+        }
+    },
+    {
         "model": "theses.lecturer",
         "pk": 13,
         "fields": {
@@ -478,6 +612,17 @@
             "full_name": "Nguyễn Linh Đan",
             "birthday": "2003-05-02",
             "address": "TP Hồ Chí Minh",
+            "faculty": "CNTT"
+        }
+    },
+    {
+        "model": "theses.lecturer",
+        "pk": 39,
+        "fields": {
+            "code": "GV004",
+            "full_name": "Nguyễn Hoài Tâm",
+            "birthday": "2003-08-16",
+            "address": "Tây Ninh",
             "faculty": "CNTT"
         }
     },
@@ -554,12 +699,87 @@
         }
     },
     {
+        "model": "theses.student",
+        "pk": 40,
+        "fields": {
+            "code": "SV007",
+            "full_name": "Nguyễn Hoài Tâm",
+            "birthday": "2003-08-16",
+            "address": "Tây Ninh",
+            "gpa": 2.0,
+            "major": "CNTT"
+        }
+    },
+    {
         "model": "theses.council",
         "pk": 1,
         "fields": {
             "name": "Hội đồng 1",
             "description": "<p>Hội đồng 1</p>",
             "is_lock": true
+        }
+    },
+    {
+        "model": "theses.council",
+        "pk": 2,
+        "fields": {
+            "name": "Hội đồng 2",
+            "description": "<p>Hội đồng 2</p>",
+            "is_lock": false
+        }
+    },
+    {
+        "model": "theses.council",
+        "pk": 3,
+        "fields": {
+            "name": "Hội đồng bảo vệ khóa 19 CNTT",
+            "description": "<p>Hội đồng bảo vệ kh&oacute;a 19 - Khoa c&ocirc;ng nghệ th&ocirc;ng tin</p>",
+            "is_lock": false
+        }
+    },
+    {
+        "model": "theses.council",
+        "pk": 4,
+        "fields": {
+            "name": "Hội đồng bảo vệ khóa 20 CNTT",
+            "description": "<p>Hội đồng bảo vệ kh&oacute;a 20 - Khoa c&ocirc;ng nghệ th&ocirc;ng tin</p>",
+            "is_lock": false
+        }
+    },
+    {
+        "model": "theses.council",
+        "pk": 5,
+        "fields": {
+            "name": "Hội đồng bảo vệ khóa 21 CNTT",
+            "description": "<p>Hội đồng bảo vệ kh&oacute;a 21 - Khoa c&ocirc;ng nghệ th&ocirc;ng tin</p>",
+            "is_lock": false
+        }
+    },
+    {
+        "model": "theses.council",
+        "pk": 6,
+        "fields": {
+            "name": "Hội đồng bảo vệ khóa 21 NN",
+            "description": "<p>Hội đồng bảo vệ kh&oacute;a 21 - Khoa ngoại ngữ</p>",
+            "is_lock": false
+        }
+    },
+    {
+        "model": "theses.council",
+        "pk": 7,
+        "fields": {
+            "name": "Hội đồng bảo vệ khóa 21 L",
+            "description": "<p>Hội đồng bảo vệ kh&oacute;a 21 - Khoa luật</p>",
+            "is_lock": false
+        }
+    },
+    {
+        "model": "theses.council",
+        "pk": 8,
+        "fields": {
+            "name": "Hội đồng bảo vệ khóa 21 MKT",
+            "description": "<p>Hội đồng bảo vệ kh&oacute;a 21&nbsp; - Khoa marketing</p>",
+            "is_lock": false
         }
     },
     {
@@ -582,11 +802,29 @@
     },
     {
         "model": "theses.councildetail",
-        "pk": 4,
+        "pk": 5,
         "fields": {
             "lecturer": 15,
             "council": 1,
             "position": 3
+        }
+    },
+    {
+        "model": "theses.councildetail",
+        "pk": 15,
+        "fields": {
+            "lecturer": 39,
+            "council": 2,
+            "position": 3
+        }
+    },
+    {
+        "model": "theses.councildetail",
+        "pk": 16,
+        "fields": {
+            "lecturer": 39,
+            "council": 1,
+            "position": 4
         }
     },
     {
@@ -604,9 +842,219 @@
             "council": 1,
             "student": 2,
             "lecturers": [
+                13
+            ]
+        }
+    },
+    {
+        "model": "theses.thesis",
+        "pk": "KL002",
+        "fields": {
+            "name": "Xu hướng MKT trong năm 2025",
+            "start_date": "2024-05-18",
+            "end_date": "2024-07-30",
+            "report_file": "",
+            "total_score": 0.0,
+            "result": false,
+            "major": "MKT",
+            "school_year": 3,
+            "council": null,
+            "student": null,
+            "lecturers": [
                 13,
+                39
+            ]
+        }
+    },
+    {
+        "model": "theses.thesis",
+        "pk": "KL003",
+        "fields": {
+            "name": "Nâng cao chất lượng nguồn nhân lực cho các Khu công nghiệp tỉnh Bắc Ninh đến 2027",
+            "start_date": "2024-05-06",
+            "end_date": "2024-09-24",
+            "report_file": "",
+            "total_score": 0.0,
+            "result": false,
+            "major": "MKT",
+            "school_year": 3,
+            "council": null,
+            "student": null,
+            "lecturers": []
+        }
+    },
+    {
+        "model": "theses.thesis",
+        "pk": "KL004",
+        "fields": {
+            "name": "Ứng dụng Digital marketing vào quảng bá du lịch cộng đồng tại làng Cổ Phước Tích",
+            "start_date": "2024-02-13",
+            "end_date": "2024-05-26",
+            "report_file": "",
+            "total_score": 0.0,
+            "result": false,
+            "major": "MKT",
+            "school_year": 3,
+            "council": null,
+            "student": null,
+            "lecturers": []
+        }
+    },
+    {
+        "model": "theses.thesis",
+        "pk": "KL005",
+        "fields": {
+            "name": "Giải pháp mở rộng thị trường tiêu thụ sản phẩm tại công ty TNHH Thương mại dịch vụ tổng hợp",
+            "start_date": "2024-06-06",
+            "end_date": "2024-08-01",
+            "report_file": "",
+            "total_score": 0.0,
+            "result": false,
+            "major": "MKT",
+            "school_year": 2,
+            "council": null,
+            "student": null,
+            "lecturers": []
+        }
+    },
+    {
+        "model": "theses.thesis",
+        "pk": "KL006",
+        "fields": {
+            "name": "Xây dựng hệ thống trợ giúp học sinh chọn trường vào lớp 10",
+            "start_date": "2024-05-08",
+            "end_date": "2024-09-05",
+            "report_file": "",
+            "total_score": 0.0,
+            "result": false,
+            "major": "CNTT",
+            "school_year": 3,
+            "council": null,
+            "student": 3,
+            "lecturers": []
+        }
+    },
+    {
+        "model": "theses.thesis",
+        "pk": "KL007",
+        "fields": {
+            "name": "Xây dựng chương trình giải quyết bài toán phát hiện virut máy tính",
+            "start_date": "2024-05-01",
+            "end_date": "2024-09-19",
+            "report_file": "",
+            "total_score": 0.0,
+            "result": false,
+            "major": "CNTT",
+            "school_year": 3,
+            "council": null,
+            "student": 40,
+            "lecturers": []
+        }
+    },
+    {
+        "model": "theses.thesis",
+        "pk": "KL008",
+        "fields": {
+            "name": "Hệ thống quản lý thiết bị dựa trên giải pháp sử dụng RFID",
+            "start_date": "2024-05-31",
+            "end_date": "2024-08-31",
+            "report_file": "",
+            "total_score": 0.0,
+            "result": false,
+            "major": "CNTT",
+            "school_year": 3,
+            "council": null,
+            "student": null,
+            "lecturers": []
+        }
+    },
+    {
+        "model": "theses.thesis",
+        "pk": "KL009",
+        "fields": {
+            "name": "Cán cân thanh toán quốc tế – Những vấn đề pháp lý cần lưu ý",
+            "start_date": "2024-05-15",
+            "end_date": "2024-07-18",
+            "report_file": "",
+            "total_score": 0.0,
+            "result": false,
+            "major": "LKT",
+            "school_year": 3,
+            "council": null,
+            "student": null,
+            "lecturers": []
+        }
+    },
+    {
+        "model": "theses.thesis",
+        "pk": "KL010",
+        "fields": {
+            "name": "Khó khăn của Việt Nam trong điều tra và tiến hành các biện pháp khắc phục thương mại và hướng giải quyết",
+            "start_date": "2024-05-21",
+            "end_date": "2024-08-17",
+            "report_file": "",
+            "total_score": 0.0,
+            "result": false,
+            "major": "LKT",
+            "school_year": 3,
+            "council": null,
+            "student": null,
+            "lecturers": []
+        }
+    },
+    {
+        "model": "theses.thesis",
+        "pk": "KL011",
+        "fields": {
+            "name": "An Analysis of Current Graduation Thesis Writing by English Majors in Independent Institute",
+            "start_date": "2024-05-12",
+            "end_date": "2024-08-07",
+            "report_file": "",
+            "total_score": 0.0,
+            "result": false,
+            "major": "NNA",
+            "school_year": 3,
+            "council": null,
+            "student": 19,
+            "lecturers": [
                 15
             ]
+        }
+    },
+    {
+        "model": "theses.thesis",
+        "pk": "KL012",
+        "fields": {
+            "name": "Potential for informal guardianship in community-based wildlife crime prevention: Insights from Vietnam",
+            "start_date": "2024-05-13",
+            "end_date": "2024-08-09",
+            "report_file": "",
+            "total_score": 0.0,
+            "result": false,
+            "major": "NNA",
+            "school_year": 3,
+            "council": null,
+            "student": 18,
+            "lecturers": [
+                15
+            ]
+        }
+    },
+    {
+        "model": "theses.thesis",
+        "pk": "KL013",
+        "fields": {
+            "name": "Những nhân tố tác động đến hoạt động Logistics ở Việt nam",
+            "start_date": "2024-05-30",
+            "end_date": "2024-09-19",
+            "report_file": "",
+            "total_score": 0.0,
+            "result": false,
+            "major": "LGT",
+            "school_year": 3,
+            "council": null,
+            "student": null,
+            "lecturers": []
         }
     }
 ]

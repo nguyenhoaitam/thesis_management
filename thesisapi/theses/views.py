@@ -1,6 +1,8 @@
+import cloudinary
 from django.contrib.auth.hashers import make_password
 from rest_framework import viewsets, generics, status, parsers, permissions
 from rest_framework.decorators import action
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 from theses.models import *
 from theses import serializers, paginators, perms
@@ -174,7 +176,7 @@ class LecturerViewSet(viewsets.ViewSet, generics.ListAPIView):
 
         lecturer = self.get_object()
         council_details = CouncilDetail.objects.filter(lecturer=lecturer).select_related('council', 'position')
-        serializer = serializers.CouncilDetailSerializer(council_details, many=True)
+        serializer = serializers.CouncilDetailWithIDSerializer(council_details, many=True)
         return Response(serializer.data)
 
     # Lấy khóa luận mà giảng viên hướng dẫn
@@ -272,8 +274,8 @@ class CouncilViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIV
             council = self.get_object()
             members = CouncilDetail.objects.filter(council=council).select_related('lecturer', 'position')
             members_data = [{
-                "Tên": member.lecturer.full_name,
-                "Vị trí": member.position.name
+                "full_name": member.lecturer.full_name,
+                "position": member.position.name
             } for member in members]
             return Response(members_data, status=status.HTTP_200_OK)
         except Council.DoesNotExist:
@@ -311,6 +313,13 @@ class CouncilViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIV
 
         if thesis.council:
             return Response({'Lỗi': f'Khóa luận {thesis_code} đã được gán hội đồng.'},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        # Kiểm tra nếu hội đồng có giảng viên là giảng viên hướng dẫn khóa luận đó
+        thesis_lecturers = thesis.lecturers.all()
+        council_lecturers = council.councildetail_set.values_list('lecturer', flat=True)
+        if any(lecturer.user_id in council_lecturers for lecturer in thesis_lecturers):
+            return Response({'Lỗi': 'Hội đồng có giảng viên là giảng viên hướng dẫn khóa luận này.'},
                             status=status.HTTP_400_BAD_REQUEST)
 
         # Gán hội đồng cho khóa luận
@@ -405,7 +414,7 @@ class CouncilDetailViewSet(viewsets.ViewSet, generics.ListAPIView, generics.Dest
 
 
 # Khóa luận
-class ThesisViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.RetrieveAPIView):
+class ThesisViewSet(viewsets.ViewSet, generics.ListAPIView, generics.RetrieveAPIView, generics.DestroyAPIView):
     queryset = Thesis.objects.prefetch_related('lecturers').all()
     serializer_class = serializers.ThesisSerializer
     parser_classes = [parsers.MultiPartParser, ]
@@ -413,17 +422,39 @@ class ThesisViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Retri
 
     # permission_classes = [perms.IsAuthenticated]
 
-    def list(self, request):
-        queryset = self.get_queryset()
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        student_id = data.get('student')
+        major_id = data.get('major')
+        try:
+            student = Student.objects.select_related('major').get(user_id=student_id)
 
-        paginator = self.pagination_class()
-        result_page = paginator.paginate_queryset(queryset, request)
+            if Thesis.objects.filter(student=student).exists():
+                return Response({"Lỗi": "Sinh viên đã tham gia một khóa luận trước đó và không thể tạo khóa luận mới."},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+            if student.major_id != major_id:
+                return Response({"Lỗi": "Ngành của sinh viên không khớp với ngành của khóa luận."},
+                                status=status.HTTP_400_BAD_REQUEST)
+
+            serializer = self.serializer_class(data=request.data)
+
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                return Response({"Lỗi": "Lỗi khi thêm khóa luận."}, status=status.HTTP_400_BAD_REQUEST)
+        except Student.DoesNotExist:
+            return Response({"Lỗi": "Vui lòng chọn sinh viên làm khóa luận."}, status=status.HTTP_404_NOT_FOUND)
+
+    def get_queryset(self):
+        queryset = self.queryset
 
         # Lọc theo các tham số truy vấn
-        q = request.query_params.get('q')
-        council_id = request.query_params.get('council_id')
-        major_id = request.query_params.get('major_id')
-        school_year_id = request.query_params.get('school_year_id')
+        q = self.request.query_params.get('q')
+        council_id = self.request.query_params.get('council_id')
+        major_id = self.request.query_params.get('major_id')
+        school_year_id = self.request.query_params.get('school_year_id')
 
         if q:
             queryset = queryset.filter(name__icontains=q)
@@ -434,16 +465,17 @@ class ThesisViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Retri
         if school_year_id:
             queryset = queryset.filter(school_year_id=school_year_id)
 
-        serializer = self.serializer_class(result_page, many=True)
-        return paginator.get_paginated_response(serializer.data)
+        return queryset
 
-    # def create(self, request):
-    #     # Lấy ID của sinh viên từ dữ liệu yêu cầu POST
-    #     student_id = request.data.get('student_id')
-    #
-    #     # Kiểm tra xem sinh viên đã tham gia khóa luận nào trước đó hay không
-    #     if Thesis.objects.filter(student_id=student_id).exists():
-    #         raise PermissionDenied("Sinh viên đã tham gia một khóa luận trước đó và không thể tạo khóa luận mới.")
+    # Sửa thông tin
+    def partial_update(self, request, pk=None):
+        thesis = self.get_object()
+        serializer = self.serializer_class(thesis, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # Thêm giảng viên hướng dẫn vào khóa luận
     @action(detail=True, methods=['post'], url_path='add_lecturer')
@@ -460,9 +492,20 @@ class ThesisViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Retri
             lecturer_code = request.data.get('lecturer_code')
 
             # Lấy đối tượng giảng viên từ mã
-            lecturer = Lecturer.objects.get(user_id=lecturer_code)
+            lecturer = Lecturer.objects.get(code=lecturer_code)
         except (Thesis.DoesNotExist, Lecturer.DoesNotExist):
-            return Response({"Lỗi": "Khóa luận hoặc Giảng viên không tồn tại."}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"Lỗi": "Khóa luận hoặc giảng viên không tồn tại."}, status=status.HTTP_404_NOT_FOUND)
+
+        # Lấy sinh viên làm khóa luận từ đối tượng khóa luận
+        student = thesis.student
+
+        # Kiểm tra khoa của sinh viên và khóa luận
+        if lecturer.faculty != thesis.major.faculty:
+            return Response({"Lỗi": "Giảng viên và khóa luận không cùng khoa."}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Kiểm tra xem giảng viên đã có trong danh sách hướng dẫn chưa
+        if lecturer in thesis.lecturers.all():
+            return Response({"Lỗi": "Giảng viên đã có trong danh sách hướng dẫn."}, status=status.HTTP_400_BAD_REQUEST)
 
         # Thêm giảng viên vào khóa luận
         thesis.lecturers.add(lecturer)
@@ -473,6 +516,9 @@ class ThesisViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Retri
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # Tính điểm tổng của KL
+
+    # Thêm file báo cáo
+
 
 # Điểm
 # Cột điểm

@@ -132,7 +132,7 @@ class Thesis(models.Model):  # Khóa luận
     name = models.CharField(max_length=200, null=False)
     start_date = models.DateField()
     end_date = models.DateField()
-    report_file = RichTextField(null=True, blank=True)  # File báo cáo
+    report_file = RichTextField(null=True, blank=True)
     total_score = models.FloatField(null=True, default=0)
     result = models.BooleanField(default=False)
     major = models.ForeignKey(Major, on_delete=models.PROTECT)

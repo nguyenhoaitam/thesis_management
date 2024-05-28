@@ -36,8 +36,6 @@ class UserSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         rep = super().to_representation(instance)
 
-        rep['role'] = instance.role.name if instance.role else None
-
         avatar = getattr(instance, 'avatar', None)
         if avatar:
             rep['avatar'] = instance.avatar.url
@@ -157,6 +155,22 @@ class CouncilDetailSerializer(serializers.ModelSerializer):
         rep = super().to_representation(instance)
         rep['lecturer'] = instance.lecturer.full_name if instance.lecturer else None
         rep['council'] = instance.council.name if instance.council else None
+        rep['position'] = instance.position.name if instance.position else None
+        return rep
+
+
+# Custom lấy thêm ID và name để thuận tiện cho xử lý lấy hội đống gv tham gia
+class CouncilDetailWithIDSerializer(serializers.ModelSerializer):
+    council_id = serializers.PrimaryKeyRelatedField(source='council.id', queryset=Council.objects.all())
+    council_name = serializers.CharField(source='council.name', read_only=True)
+
+    class Meta:
+        model = CouncilDetail
+        fields = ['id', 'council_id', 'council_name', 'lecturer', 'position']
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        rep['lecturer'] = instance.lecturer.full_name if instance.lecturer else None
         rep['position'] = instance.position.name if instance.position else None
         return rep
 
