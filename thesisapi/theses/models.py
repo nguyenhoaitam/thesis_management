@@ -103,17 +103,8 @@ class Lecturer(UserBaseModel):  # Giảng viên
         return self.full_name
 
 
-class Student(UserBaseModel):  # Sinh viên
-    gpa = models.FloatField()
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    major = models.ForeignKey(Major, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.full_name
-
-
 class Council(models.Model):  # Hội đồng
-    name = models.CharField(max_length=50, null=False)
+    name = models.CharField(max_length=50, null=False, unique=True)
     description = RichTextField()
     is_lock = models.BooleanField(default=False)
 
@@ -138,13 +129,22 @@ class Thesis(models.Model):  # Khóa luận
     major = models.ForeignKey(Major, on_delete=models.PROTECT)
     school_year = models.ForeignKey(SchoolYear, on_delete=models.PROTECT)
     council = models.ForeignKey(Council, on_delete=models.PROTECT, null=True, blank=True)
-    student = models.ForeignKey(Student, on_delete=models.PROTECT, null=True, blank=True)
     lecturers = models.ManyToManyField(Lecturer, null=True, blank=True)  # Giảng viên hướng dẫn khóa luận (Tối đa 2)
 
     # Hàm tính điểm TB
 
     def __str__(self):
         return self.name
+
+
+class Student(UserBaseModel):  # Sinh viên
+    gpa = models.FloatField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    major = models.ForeignKey(Major, on_delete=models.PROTECT)
+    thesis = models.ForeignKey(Thesis, on_delete=models.PROTECT, null=True, blank=True)
+
+    def __str__(self):
+        return self.full_name
 
 
 class Score(models.Model):  # Điểm

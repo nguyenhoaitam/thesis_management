@@ -65,7 +65,7 @@ class MyLecturerAdmin(admin.ModelAdmin):
 
 
 class MyStudentAdmin(admin.ModelAdmin):
-    list_display = ['code', 'full_name', 'birthday', 'address', 'gpa', 'user_id', 'major']
+    list_display = ['code', 'full_name', 'birthday', 'address', 'gpa', 'user_id', 'major', 'thesis']
     search_fields = ['code', 'full_name']
     list_filter = ['major']
 
@@ -82,7 +82,7 @@ class MyCouncilDetailAdmin(admin.ModelAdmin):
 
 
 class MyThesisAdmin(admin.ModelAdmin):
-    list_display = ['code', 'name', 'start_date', 'end_date', 'total_score', 'result', 'major', 'student']
+    list_display = ['code', 'name', 'start_date', 'end_date', 'total_score', 'result', 'major', 'council']
     search_fields = ['name', 'major']
     list_filter = ['major', 'school_year']
 

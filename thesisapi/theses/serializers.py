@@ -130,11 +130,12 @@ class LecturerSerializer(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['code', 'full_name', 'birthday', 'address', 'gpa', 'user', 'major']
+        fields = ['code', 'full_name', 'birthday', 'address', 'gpa', 'user', 'major', 'thesis']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['major'] = instance.major.name if instance.major else None
+        rep['thesis'] = instance.thesis.name if instance.thesis else None
         return rep
 
 
@@ -195,14 +196,13 @@ class ThesisSerializer(serializers.ModelSerializer):
         model = Thesis
         fields = ['code', 'name', 'start_date', 'end_date', 'report_file',
                   'total_score', 'result', 'council', 'major',
-                  'school_year', 'student', 'lecturers', 'reviewer']
+                  'school_year', 'lecturers', 'reviewer']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['council'] = instance.council.name if instance.council else None
         rep['major'] = instance.major.name if instance.major else None
         rep['school_year'] = instance.school_year.name if instance.school_year else None
-        rep['student'] = instance.student.full_name if instance.student else None
         return rep
 
 

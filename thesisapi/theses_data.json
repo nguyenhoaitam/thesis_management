@@ -32,7 +32,7 @@
         "pk": 1,
         "fields": {
             "password": "pbkdf2_sha256$720000$wM2yKrx2Fq3qXrszGsgIPY$JFGKe8iZJj2Aprs7wn6QTbL70WG84DAUY1Pt8MfGgqs=",
-            "last_login": "2024-05-23T05:12:28.426Z",
+            "last_login": "2024-05-28T16:33:07.244Z",
             "is_superuser": true,
             "username": "admin",
             "first_name": "",
@@ -327,7 +327,7 @@
             "is_staff": false,
             "is_active": true,
             "date_joined": "2024-05-26T16:37:43Z",
-            "avatar": "image/upload/v1716741567/ktwpgh9vqre6fcqsl1un.jpg",
+            "avatar": "image/upload/v1716827819/cxu1604rn64aflt4sltj.jpg",
             "phone": "0786896036",
             "gender": "Nam",
             "role": "student",
@@ -627,90 +627,6 @@
         }
     },
     {
-        "model": "theses.student",
-        "pk": 2,
-        "fields": {
-            "code": "SV001",
-            "full_name": "Trần Thảo My",
-            "birthday": "2003-05-10",
-            "address": "TP Hồ Chí Minh",
-            "gpa": 3.2,
-            "major": "CNTT"
-        }
-    },
-    {
-        "model": "theses.student",
-        "pk": 3,
-        "fields": {
-            "code": "SV002",
-            "full_name": "Văn Thành Nam",
-            "birthday": "2003-10-01",
-            "address": "Tây Ninh",
-            "gpa": 3.0,
-            "major": "CNTT"
-        }
-    },
-    {
-        "model": "theses.student",
-        "pk": 17,
-        "fields": {
-            "code": "SV003",
-            "full_name": "Nguyễn Trọng Nghĩa",
-            "birthday": "2003-01-24",
-            "address": "Cần Thơ",
-            "gpa": 2.9,
-            "major": "KHMT"
-        }
-    },
-    {
-        "model": "theses.student",
-        "pk": 18,
-        "fields": {
-            "code": "SV004",
-            "full_name": "Nguyễn Tuấn Kiệt",
-            "birthday": "2003-09-14",
-            "address": "TP Hồ Chí Minh",
-            "gpa": 3.35,
-            "major": "NNA"
-        }
-    },
-    {
-        "model": "theses.student",
-        "pk": 19,
-        "fields": {
-            "code": "SV005",
-            "full_name": "Phạm Thành Đạt",
-            "birthday": "2003-12-29",
-            "address": "TP Hồ Chí Minh",
-            "gpa": 3.9,
-            "major": "NNA"
-        }
-    },
-    {
-        "model": "theses.student",
-        "pk": 20,
-        "fields": {
-            "code": "SV006",
-            "full_name": "Lê Minh Trung",
-            "birthday": "2003-05-02",
-            "address": "Tây Ninh",
-            "gpa": 2.7,
-            "major": "LGT"
-        }
-    },
-    {
-        "model": "theses.student",
-        "pk": 40,
-        "fields": {
-            "code": "SV007",
-            "full_name": "Nguyễn Hoài Tâm",
-            "birthday": "2003-08-16",
-            "address": "Tây Ninh",
-            "gpa": 2.0,
-            "major": "CNTT"
-        }
-    },
-    {
         "model": "theses.council",
         "pk": 1,
         "fields": {
@@ -829,6 +745,40 @@
     },
     {
         "model": "theses.thesis",
+        "pk": "abc",
+        "fields": {
+            "name": "test",
+            "start_date": "2020-05-05",
+            "end_date": "2020-05-06",
+            "report_file": "",
+            "total_score": 0.0,
+            "result": false,
+            "major": "NNA",
+            "school_year": 2,
+            "council": null,
+            "lecturers": [
+                15
+            ]
+        }
+    },
+    {
+        "model": "theses.thesis",
+        "pk": "Abcd",
+        "fields": {
+            "name": "abc",
+            "start_date": "2020-12-20",
+            "end_date": "2020-12-31",
+            "report_file": null,
+            "total_score": 0.0,
+            "result": false,
+            "major": "CNTT",
+            "school_year": 2,
+            "council": null,
+            "lecturers": []
+        }
+    },
+    {
+        "model": "theses.thesis",
         "pk": "KL001",
         "fields": {
             "name": "Hệ thống quản lý khóa luận tốt nghiệp",
@@ -839,8 +789,7 @@
             "result": false,
             "major": "CNTT",
             "school_year": 3,
-            "council": 1,
-            "student": 2,
+            "council": null,
             "lecturers": [
                 13
             ]
@@ -859,7 +808,6 @@
             "major": "MKT",
             "school_year": 3,
             "council": null,
-            "student": null,
             "lecturers": [
                 13,
                 39
@@ -879,7 +827,6 @@
             "major": "MKT",
             "school_year": 3,
             "council": null,
-            "student": null,
             "lecturers": []
         }
     },
@@ -896,7 +843,6 @@
             "major": "MKT",
             "school_year": 3,
             "council": null,
-            "student": null,
             "lecturers": []
         }
     },
@@ -913,7 +859,6 @@
             "major": "MKT",
             "school_year": 2,
             "council": null,
-            "student": null,
             "lecturers": []
         }
     },
@@ -930,7 +875,6 @@
             "major": "CNTT",
             "school_year": 3,
             "council": null,
-            "student": 3,
             "lecturers": []
         }
     },
@@ -947,7 +891,6 @@
             "major": "CNTT",
             "school_year": 3,
             "council": null,
-            "student": 40,
             "lecturers": []
         }
     },
@@ -964,7 +907,6 @@
             "major": "CNTT",
             "school_year": 3,
             "council": null,
-            "student": null,
             "lecturers": []
         }
     },
@@ -981,7 +923,6 @@
             "major": "LKT",
             "school_year": 3,
             "council": null,
-            "student": null,
             "lecturers": []
         }
     },
@@ -998,7 +939,6 @@
             "major": "LKT",
             "school_year": 3,
             "council": null,
-            "student": null,
             "lecturers": []
         }
     },
@@ -1015,7 +955,6 @@
             "major": "NNA",
             "school_year": 3,
             "council": null,
-            "student": 19,
             "lecturers": [
                 15
             ]
@@ -1034,7 +973,6 @@
             "major": "NNA",
             "school_year": 3,
             "council": null,
-            "student": 18,
             "lecturers": [
                 15
             ]
@@ -1053,8 +991,98 @@
             "major": "LGT",
             "school_year": 3,
             "council": null,
-            "student": null,
             "lecturers": []
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 2,
+        "fields": {
+            "code": "SV001",
+            "full_name": "Trần Thảo My",
+            "birthday": "2003-05-10",
+            "address": "TP Hồ Chí Minh",
+            "gpa": 3.2,
+            "major": "CNTT",
+            "thesis": "KL001"
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 3,
+        "fields": {
+            "code": "SV002",
+            "full_name": "Văn Thành Nam",
+            "birthday": "2003-10-01",
+            "address": "Tây Ninh",
+            "gpa": 3.0,
+            "major": "CNTT",
+            "thesis": "KL001"
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 17,
+        "fields": {
+            "code": "SV003",
+            "full_name": "Nguyễn Trọng Nghĩa",
+            "birthday": "2003-01-24",
+            "address": "Cần Thơ",
+            "gpa": 2.9,
+            "major": "KHMT",
+            "thesis": null
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 18,
+        "fields": {
+            "code": "SV004",
+            "full_name": "Nguyễn Tuấn Kiệt",
+            "birthday": "2003-09-14",
+            "address": "TP Hồ Chí Minh",
+            "gpa": 3.35,
+            "major": "NNA",
+            "thesis": null
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 19,
+        "fields": {
+            "code": "SV005",
+            "full_name": "Phạm Thành Đạt",
+            "birthday": "2003-12-29",
+            "address": "TP Hồ Chí Minh",
+            "gpa": 3.9,
+            "major": "NNA",
+            "thesis": null
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 20,
+        "fields": {
+            "code": "SV006",
+            "full_name": "Lê Minh Trung",
+            "birthday": "2003-05-02",
+            "address": "Tây Ninh",
+            "gpa": 2.7,
+            "major": "LGT",
+            "thesis": null
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 40,
+        "fields": {
+            "code": "SV007",
+            "full_name": "Nguyễn Hoài Tâm",
+            "birthday": "2003-08-16",
+            "address": "Tây Ninh",
+            "gpa": 2.0,
+            "major": "CNTT",
+            "thesis": null
         }
     }
 ]
