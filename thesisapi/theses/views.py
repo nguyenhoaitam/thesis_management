@@ -211,34 +211,9 @@ class StudentViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIV
 
         maj_id = self.request.query_params.get('major_id')
         if maj_id:
-            queryset = queryset.filter(faculty_id=maj_id)
+            queryset = queryset.filter(major_id=maj_id)
 
         return queryset
-
-    # Gán khóa luận vào sinh viên
-    @action(detail=True, methods=['post'], url_path='assign_thesis')
-    def assign_thesis(self, request, pk=None):
-        student = self.get_object()
-        thesis_code = request.data.get('thesis_code')
-
-        # Kiểm tra nếu sinh viên đã có khóa luận
-        if student.thesis:
-            return Response({'Lỗi': 'Sinh viên đã có khóa luận'}, status=status.HTTP_400_BAD_REQUEST)
-
-        try:
-            thesis = Thesis.objects.get(pk=thesis_code)
-        except Thesis.DoesNotExist:
-            return Response({'Lỗi': 'Không tìm thấy khóa luận'}, status=status.HTTP_404_NOT_FOUND)
-
-        # Kiểm tra ngành của sinh viên phải cùng với ngành của khóa luận
-        if student.major != thesis.major:
-            return Response({'Lỗi': 'Không thể thêm do sinh viên và khóa luận không cùng ngành'}, status=status.HTTP_400_BAD_REQUEST)
-
-        student.thesis = thesis
-        student.save()
-
-        serializer = self.get_serializer(student)
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
     # Lấy điểm khóa luận của sinh viên
 
@@ -534,6 +509,30 @@ class ThesisViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Retri
         serializer = self.get_serializer(thesis)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    # Thêm khóa luận vào trong sinh viên
+    @action(detail=True, methods=['post'], url_path='add_student')
+    def add_student(self, request, pk=None):
+        try:
+            thesis = self.get_object()
+            student_id = request.data.get('student_id')
+            student = Student.objects.get(user_id=student_id)
+        except (Thesis.DoesNotExist, Student.DoesNotExist):
+            return Response({"Lỗi": "Khóa luận hoặc sinh viên không tồn tại."}, status=status.HTTP_404_NOT_FOUND)
+
+        if student.thesis:
+            return Response({"Lỗi": "Sinh viên đã có khóa luận."}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Kiểm tra ngành của sinh viên phải cùng với ngành của khóa luận
+        if student.major != thesis.major:
+            return Response({'Lỗi': 'Không thể thêm do sinh viên và khóa luận không cùng ngành'},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        student.thesis = thesis
+        student.save()
+
+        serializer = self.get_serializer(thesis)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     # Tính điểm tổng của KL
 
     # Thêm file báo cáo
@@ -569,16 +568,25 @@ class ThesisCriteriaViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.L
 
 
 # Bài đăng
-class PostViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIView, generics.RetrieveAPIView):
+class PostViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.RetrieveAPIView):
     queryset = Post.objects.filter(active=True)
     serializer_class = serializers.PostSerializer
     parser_classes = [parsers.MultiPartParser]
     pagination_class = paginators.BasePaginator
 
-    def get_permissions(self):
-        if self.action in ['add_comment', 'like']:
-            return [permissions.IsAuthenticated()]
+    def get_queryset(self):
+        queryset = self.queryset
+        q = self.request.query_params.get('q')
+        if q:
+            queryset = queryset.filter(content__icontains=q)
 
+        return queryset
+
+    def get_permissions(self):
+        if self.action in ['create', 'add_comment', 'like']:
+            return [permissions.IsAuthenticated()]
+        if self.action in ['partial_update', 'destroy']:
+            return [perms.PostOwner()]
         return [permissions.AllowAny()]
 
     def get_serializer_class(self):
@@ -586,6 +594,28 @@ class PostViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIView
             return serializers.AuthenticatedPost
 
         return self.serializer_class
+
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # Sửa post
+    def partial_update(self, request, pk=None):
+        post = self.get_object()
+        serializer = self.serializer_class(post, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # Xóa post
+    def destroy(self, request, pk=None):
+        post = self.get_object()
+        post.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     @action(methods=['get'], url_path='comments', detail=True)
     def get_comments(self, request, pk):
@@ -599,7 +629,7 @@ class PostViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIView
 
         return Response(serializers.CommentSerializer(comments, many=True).data)
 
-    @action(methods=['post'], url_path='comments', detail=True)
+    @action(methods=['post'], url_path='comment', detail=True)
     def add_comment(self, request, pk):
         c = self.get_object().comment_set.create(content=request.data.get('content'),
                                                  user=request.user)
@@ -617,9 +647,18 @@ class PostViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIView
 
 
 # Bình luận
-class CommentViewSet(viewsets.ViewSet, generics.DestroyAPIView, generics.UpdateAPIView, generics.ListAPIView):
+class CommentViewSet(viewsets.ViewSet, generics.DestroyAPIView, generics.ListAPIView):
     queryset = Comment.objects.filter(active=True)
     serializer_class = serializers.CommentSerializer
     parser_classes = [parsers.MultiPartParser]
     pagination_class = paginators.BasePaginator
     permission_classes = [perms.CommentOwner]
+
+    # Sửa comment
+    def partial_update(self, request, pk=None):
+        cmt = self.get_object()
+        serializer = self.serializer_class(cmt, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

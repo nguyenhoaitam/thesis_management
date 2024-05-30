@@ -236,7 +236,8 @@ class ThesisCriteriaSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields =['created_date', 'updated_date', 'content', 'user']
+        fields = ['created_date', 'updated_date', 'content', 'user']
+        read_only_fields = ['user']
 
 
 class AuthenticatedPost(PostSerializer):

@@ -320,7 +320,7 @@
             "password": "pbkdf2_sha256$720000$FyNfFJ5TYZTnVVihAm2mmM$uPhUqBgAVrQ/By6pslAvEWy3hEIWTsaTpzZApEtu/EQ=",
             "last_login": null,
             "is_superuser": false,
-            "username": "nhanlesv",
+            "username": "anhnhansv",
             "first_name": "Lê",
             "last_name": "Nhân",
             "email": "2151050293nhan@ou.edu.vn",
@@ -1030,7 +1030,7 @@
             "address": "Cần Thơ",
             "gpa": 2.9,
             "major": "KHMT",
-            "thesis": null
+            "thesis": "Abcd"
         }
     },
     {
@@ -1184,7 +1184,7 @@
         "pk": 1,
         "fields": {
             "created_date": "2024-05-30T08:04:16.359Z",
-            "updated_date": "2024-05-30T08:36:24.445Z",
+            "updated_date": "2024-05-30T15:09:11.640Z",
             "active": false,
             "user": 20,
             "post": 1
@@ -1219,23 +1219,23 @@
         "pk": 3,
         "fields": {
             "created_date": "2024-05-30T08:14:20.758Z",
-            "updated_date": "2024-05-30T08:14:20.758Z",
+            "updated_date": "2024-05-30T12:21:48.882Z",
             "active": true,
             "user": 20,
             "post": 1,
-            "content": "comment 1"
+            "content": "Cập nhật comment 2"
         }
     },
     {
         "model": "theses.comment",
-        "pk": 6,
+        "pk": 7,
         "fields": {
-            "created_date": "2024-05-30T08:19:56.580Z",
-            "updated_date": "2024-05-30T08:19:56.580Z",
+            "created_date": "2024-05-30T15:10:51.621Z",
+            "updated_date": "2024-05-30T15:10:51.621Z",
             "active": true,
             "user": 20,
             "post": 1,
-            "content": "comment 2"
+            "content": "Comment test 1010"
         }
     }
 ]
