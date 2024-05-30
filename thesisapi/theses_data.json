@@ -630,7 +630,7 @@
         "model": "theses.council",
         "pk": 1,
         "fields": {
-            "name": "Hội đồng 1",
+            "name": "Hội đồng bảo vệ tháng 5",
             "description": "<p>Hội đồng 1</p>",
             "is_lock": true
         }
@@ -755,7 +755,7 @@
             "result": false,
             "major": "NNA",
             "school_year": 2,
-            "council": null,
+            "council": 1,
             "lecturers": [
                 15
             ]
@@ -1083,6 +1083,159 @@
             "gpa": 2.0,
             "major": "CNTT",
             "thesis": null
+        }
+    },
+    {
+        "model": "theses.criteria",
+        "pk": 1,
+        "fields": {
+            "name": "Hình thức khóa luận",
+            "evaluation_method": "Đánh giá dựa trên cách trình bày khóa luận, rõ bố cục"
+        }
+    },
+    {
+        "model": "theses.criteria",
+        "pk": 2,
+        "fields": {
+            "name": "Tính sáng tạo",
+            "evaluation_method": "Đánh giá dựa trên khả năng vận dụng sáng tạo những cái mới"
+        }
+    },
+    {
+        "model": "theses.criteria",
+        "pk": 3,
+        "fields": {
+            "name": "Đặt vấn đề",
+            "evaluation_method": "Xác định rõ mục tiêu của đề tài"
+        }
+    },
+    {
+        "model": "theses.criteria",
+        "pk": 4,
+        "fields": {
+            "name": "Nâng cao",
+            "evaluation_method": "Đánh giá dựa trên mức độ sử dụng các kỹ thuật nâng cao"
+        }
+    },
+    {
+        "model": "theses.criteria",
+        "pk": 5,
+        "fields": {
+            "name": "Kiến thức chuyên môn",
+            "evaluation_method": "Đánh giá dựa trên mức độ hiểu biết về chuyên ngành"
+        }
+    },
+    {
+        "model": "theses.criteria",
+        "pk": 6,
+        "fields": {
+            "name": "Phương pháp nghiên cứu",
+            "evaluation_method": "Đánh giá dựa trên phương pháp và quy trình nghiên cứu"
+        }
+    },
+    {
+        "model": "theses.criteria",
+        "pk": 7,
+        "fields": {
+            "name": "Kỹ năng trình bày",
+            "evaluation_method": "Đánh giá dựa trên kỹ năng thuyết trình và trình bày báo cáo"
+        }
+    },
+    {
+        "model": "theses.thesiscriteria",
+        "pk": 1,
+        "fields": {
+            "thesis": "KL001",
+            "criteria": 7,
+            "weight": 0.5
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 1,
+        "fields": {
+            "thesis_criteria": 1,
+            "council_detail": 1,
+            "score_number": 7.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 2,
+        "fields": {
+            "thesis_criteria": 1,
+            "council_detail": 3,
+            "score_number": 7.0
+        }
+    },
+    {
+        "model": "theses.post",
+        "pk": 1,
+        "fields": {
+            "created_date": "2024-05-30T07:58:30.051Z",
+            "updated_date": "2024-05-30T07:58:30.051Z",
+            "active": true,
+            "user": 1,
+            "content": "Test"
+        }
+    },
+    {
+        "model": "theses.like",
+        "pk": 1,
+        "fields": {
+            "created_date": "2024-05-30T08:04:16.359Z",
+            "updated_date": "2024-05-30T08:36:24.445Z",
+            "active": false,
+            "user": 20,
+            "post": 1
+        }
+    },
+    {
+        "model": "theses.comment",
+        "pk": 1,
+        "fields": {
+            "created_date": "2024-05-30T08:11:48.911Z",
+            "updated_date": "2024-05-30T08:11:48.911Z",
+            "active": true,
+            "user": 20,
+            "post": 1,
+            "content": "comment 1"
+        }
+    },
+    {
+        "model": "theses.comment",
+        "pk": 2,
+        "fields": {
+            "created_date": "2024-05-30T08:13:40.824Z",
+            "updated_date": "2024-05-30T08:13:40.824Z",
+            "active": true,
+            "user": 20,
+            "post": 1,
+            "content": "comment 1"
+        }
+    },
+    {
+        "model": "theses.comment",
+        "pk": 3,
+        "fields": {
+            "created_date": "2024-05-30T08:14:20.758Z",
+            "updated_date": "2024-05-30T08:14:20.758Z",
+            "active": true,
+            "user": 20,
+            "post": 1,
+            "content": "comment 1"
+        }
+    },
+    {
+        "model": "theses.comment",
+        "pk": 6,
+        "fields": {
+            "created_date": "2024-05-30T08:19:56.580Z",
+            "updated_date": "2024-05-30T08:19:56.580Z",
+            "active": true,
+            "user": 20,
+            "post": 1,
+            "content": "comment 2"
         }
     }
 ]

@@ -4,8 +4,8 @@ from django.contrib.auth.hashers import make_password
 from django.utils.html import mark_safe
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
-from theses.models import Role, User, Ministry, Position, SchoolYear, Faculty, Major, \
-    Lecturer, Student, Council, CouncilDetail, Thesis, Score, ScoreComponent, ScoreColumn, ScoreDetail
+from theses.models import Role, User, Ministry, Position, SchoolYear, Faculty, Major, Lecturer, Student, Council, \
+    CouncilDetail, Thesis
 
 
 class MyRoleAdmin(admin.ModelAdmin):
@@ -87,26 +87,6 @@ class MyThesisAdmin(admin.ModelAdmin):
     list_filter = ['major', 'school_year']
 
 
-class MyScoreAdmin(admin.ModelAdmin):
-    pass
-
-
-class MyScoreComponentAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'evaluation_method']
-    search_fields = ['name']
-
-
-class MyScoreColumnAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'weight', 'score_component_id']
-    search_fields = ['name']
-    list_filter = ['score_component_id']
-
-
-class MyScoreDetailAdmin(admin.ModelAdmin):
-    list_display = ['id', 'score_number', 'score_id', 'score_column_id']
-    list_filter = ['score_id', 'score_column_id']
-
-
 admin.site.register(Role, MyRoleAdmin)
 admin.site.register(User, MyUserAdmin)
 admin.site.register(Ministry, MyMinistryAdmin)
@@ -119,7 +99,3 @@ admin.site.register(Student, MyStudentAdmin)
 admin.site.register(Council, MyCouncilAdmin)
 admin.site.register(CouncilDetail, MyCouncilDetailAdmin)
 admin.site.register(Thesis, MyThesisAdmin)
-admin.site.register(Score)
-admin.site.register(ScoreComponent, MyScoreComponentAdmin)
-admin.site.register(ScoreColumn, MyScoreColumnAdmin)
-admin.site.register(ScoreDetail, MyScoreDetailAdmin)

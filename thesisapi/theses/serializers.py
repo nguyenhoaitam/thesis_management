@@ -180,6 +180,11 @@ class CouncilDetailWithIDSerializer(serializers.ModelSerializer):
 class ThesisSerializer(serializers.ModelSerializer):
     lecturers = serializers.SerializerMethodField()
     reviewer = serializers.SerializerMethodField()
+    students = serializers.SerializerMethodField()
+
+    def get_students(self, obj):
+        students_queryset = obj.student_set.all()
+        return StudentSerializer(students_queryset, many=True).data
 
     def get_lecturers(self, obj):
         lecturers_queryset = obj.lecturers.all()
@@ -196,7 +201,7 @@ class ThesisSerializer(serializers.ModelSerializer):
         model = Thesis
         fields = ['code', 'name', 'start_date', 'end_date', 'report_file',
                   'total_score', 'result', 'council', 'major',
-                  'school_year', 'lecturers', 'reviewer']
+                  'school_year', 'students', 'lecturers', 'reviewer']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
@@ -213,22 +218,45 @@ class ScoreSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# Cột điểm
-class ScoreColumnSerializer(serializers.ModelSerializer):
+# Tiêu chí
+class CriteriaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ScoreColumn
+        model = Criteria
         fields = '__all__'
 
 
-# Điểm thành phần
-class ScoreComponentSerializer(serializers.ModelSerializer):
+# Tiêu chí của khóa luận
+class ThesisCriteriaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ScoreComponent
+        model = ThesisCriteria
         fields = '__all__'
 
 
-# Chi tiết điểm
-class ScoreDetailSerializer(serializers.ModelSerializer):
+# Bài đăng
+class PostSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ScoreDetail
-        fields = '__all__'
+        model = Post
+        fields =['created_date', 'updated_date', 'content', 'user']
+
+
+class AuthenticatedPost(PostSerializer):
+    liked = serializers.SerializerMethodField()
+
+    def get_liked(self, post):
+        return post.like_set.filter(active=True).exists()
+
+    class Meta:
+        model = PostSerializer.Meta.model
+        fields = PostSerializer.Meta.fields + ['liked']
+
+
+# Bình luận
+class CommentSerializer(serializers.ModelSerializer):
+    user = serializers.SerializerMethodField()
+
+    def get_user(self, obj):
+        return UserSerializer(obj.user).data
+
+    class Meta:
+        model = Comment
+        fields = ['id', 'content', 'created_date', 'user']

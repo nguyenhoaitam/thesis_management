@@ -45,3 +45,8 @@ class IsStudent(BasePermission):
         if request.user.is_anonymous:
             return False
         return request.user.is_authenticated and request.user.role.role_code == 'student'
+
+
+class CommentOwner(permissions.IsAuthenticated):
+    def has_object_permission(self, request, view, comment):
+        return super().has_permission(request, view) and request.user == comment.user

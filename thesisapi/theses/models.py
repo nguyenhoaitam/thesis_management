@@ -147,29 +147,42 @@ class Student(UserBaseModel):  # Sinh viên
         return self.full_name
 
 
-class Score(models.Model):  # Điểm
+class Criteria(models.Model):  # Tiêu chí (Ví dụ: Kiến thức chuyên môn, phương pháp nghiên cứu, kỹ năng trình bày)
+    name = models.CharField(max_length=150, null=False)
+    evaluation_method = models.CharField(max_length=255, null=True)  # Phương pháp đánh giá
+
+    def __str__(self):
+        return self.name
+
+
+class ThesisCriteria(models.Model):  # Tiêu chí của khóa luận
     thesis = models.ForeignKey(Thesis, on_delete=models.CASCADE)
-    council_detail = models.ForeignKey(CouncilDetail, on_delete=models.PROTECT)
-
-
-class ScoreComponent(models.Model):  # Điểm thành phần = Tiêu chí (Ví dụ: Kiến thức chuyên môn, phương pháp nghiên cứu, kỹ năng trình bày)
-    name = models.CharField(max_length=20, null=False)
-    evaluation_method = models.CharField(max_length=150, null=True)  # Phương pháp đánh giá
-
-    def __str__(self):
-        return self.name
-
-
-class ScoreColumn(models.Model):  # Cột điểm
-    name = models.CharField(max_length=20, null=False)
+    criteria = models.ForeignKey(Criteria, on_delete=models.CASCADE)
     weight = models.FloatField(null=False)  # Trọng số (%)
-    score_component = models.ForeignKey(ScoreComponent, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.name
 
 
-class ScoreDetail(models.Model):  # Chi tiết điểm
-    score_number = models.FloatField()
-    score = models.ForeignKey(Score, on_delete=models.CASCADE)
-    score_column = models.ForeignKey(ScoreColumn, on_delete=models.CASCADE)
+class Score(models.Model):  # Điểm cho tiêu chí
+    thesis_criteria = models.ForeignKey(ThesisCriteria, on_delete=models.CASCADE)
+    council_detail = models.ForeignKey(CouncilDetail, on_delete=models.PROTECT)
+    score_number = models.FloatField(null=False)  # 0 - 10
+
+
+class Post(BaseModel):  # Bài đăng
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = RichTextField()
+
+
+class Interaction(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    class Meta:
+        abstract = True
+
+
+class Like(Interaction):  # Thích
+    unique_together = ('post', 'user')
+
+
+class Comment(Interaction):  # Bình luận
+    content = models.CharField(max_length=255)
