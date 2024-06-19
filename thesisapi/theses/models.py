@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 from cloudinary.models import CloudinaryField
-from rest_framework.exceptions import ValidationError
 
 
 class BaseModel(models.Model):
@@ -42,12 +41,12 @@ class User(AbstractUser):  # Người dùng
     gender = models.CharField(max_length=10, null=False, choices=Gender_choice)
     role = models.ForeignKey(Role, on_delete=models.PROTECT)
 
-    def has_role(self, required_role):  # Hàm kiểm tra quyền của User
+    def has_role(self, required_role):
         return self.role == required_role
 
-    def save(self, *args, **kwargs):  # Hàm này có thể dùng để viết thay đổi mật khẩu
-        if not self.pk and self.is_superuser:  # Kiểm tra nếu là superuser thì gán role admin
-            self.role = Role.objects.get(code='admin')  # Gán role là admin cho superuser mới
+    def save(self, *args, **kwargs):
+        if not self.pk and self.is_superuser:
+            self.role = Role.objects.get(code='admin')
         super().save(*args, **kwargs)
 
         # if not self.avatar:
@@ -105,7 +104,7 @@ class Lecturer(UserBaseModel):  # Giảng viên
 
 class Council(models.Model):  # Hội đồng
     name = models.CharField(max_length=50, null=False, unique=True)
-    description = RichTextField()
+    description = models.CharField(max_length=50, null=False)
     is_lock = models.BooleanField(default=False)
 
     def __str__(self):
@@ -131,8 +130,6 @@ class Thesis(models.Model):  # Khóa luận
     council = models.ForeignKey(Council, on_delete=models.PROTECT, null=True, blank=True)
     lecturers = models.ManyToManyField(Lecturer, null=True, blank=True)  # Giảng viên hướng dẫn khóa luận (Tối đa 2)
 
-    # Hàm tính điểm TB
-
     def __str__(self):
         return self.name
 
@@ -141,7 +138,7 @@ class Student(UserBaseModel):  # Sinh viên
     gpa = models.FloatField()
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     major = models.ForeignKey(Major, on_delete=models.PROTECT)
-    thesis = models.ForeignKey(Thesis, on_delete=models.PROTECT, null=True, blank=True)
+    thesis = models.ForeignKey(Thesis, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.full_name

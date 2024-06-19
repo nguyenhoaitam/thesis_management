@@ -1,8 +1,6 @@
 from rest_framework import serializers
-from theses.models import *
-
-
-# Vai trò (Quản lý trong Admin)
+from theses.models import Student, Lecturer, Ministry, User, Position, SchoolYear, Faculty, Major, Council, \
+    CouncilDetail, Thesis, Score, Criteria, ThesisCriteria, Post, Comment
 
 
 # Người dùng
@@ -11,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
     lecturer = serializers.SerializerMethodField()
     ministry = serializers.SerializerMethodField()
 
-    # Lấy thông tin của sinh viên, giảng viên, giáo vụ nếu có liên kết với user thì hiện ra
+    # Lấy thông tin của sinh viên, giảng viên, giáo vụ
     def get_student(self, obj):
         try:
             student = Student.objects.get(user=obj)
@@ -117,7 +115,7 @@ class MajorSerializer(serializers.ModelSerializer):
 class LecturerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lecturer
-        fields = ['code', 'full_name', 'birthday', 'address', 'faculty']
+        fields = ['user', 'code', 'full_name', 'birthday', 'address', 'faculty']
 
     # Trả về tên khoa khi GET
     def to_representation(self, instance): # to_representation được ghi đè để thay đổi cách hiển thị
@@ -130,12 +128,11 @@ class LecturerSerializer(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = ['code', 'full_name', 'birthday', 'address', 'gpa', 'user', 'major', 'thesis']
+        fields = ['user', 'code', 'full_name', 'birthday', 'address', 'gpa', 'major', 'thesis']
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
         rep['major'] = instance.major.name if instance.major else None
-        rep['thesis'] = instance.thesis.name if instance.thesis else None
         return rep
 
 
@@ -160,7 +157,7 @@ class CouncilDetailSerializer(serializers.ModelSerializer):
         return rep
 
 
-# Custom lấy thêm ID và name để thuận tiện cho xử lý lấy hội đống gv tham gia
+# Lấy thêm ID và name để thuận tiện cho xử lý lấy hội đồng gv tham gia
 class CouncilDetailWithIDSerializer(serializers.ModelSerializer):
     council_id = serializers.PrimaryKeyRelatedField(source='council.id', queryset=Council.objects.all())
     council_name = serializers.CharField(source='council.name', read_only=True)
@@ -205,9 +202,11 @@ class ThesisSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
+
         rep['council'] = instance.council.name if instance.council else None
         rep['major'] = instance.major.name if instance.major else None
         rep['school_year'] = instance.school_year.name if instance.school_year else None
+
         return rep
 
 
@@ -215,7 +214,7 @@ class ThesisSerializer(serializers.ModelSerializer):
 class ScoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Score
-        fields = '__all__'
+        fields = ['thesis_criteria', 'council_detail', 'score_number']
 
 
 # Tiêu chí
@@ -227,24 +226,56 @@ class CriteriaSerializer(serializers.ModelSerializer):
 
 # Tiêu chí của khóa luận
 class ThesisCriteriaSerializer(serializers.ModelSerializer):
+    criteria = serializers.SerializerMethodField()
+    scores = serializers.SerializerMethodField()
+
+    def get_criteria(self, obj):
+        criteria_instance = obj.criteria
+        serializer = CriteriaSerializer(criteria_instance)
+        return serializer.data
+
+    def get_scores(self, obj):
+        scores_queryset = Score.objects.filter(thesis_criteria=obj)
+        serializer = ScoreSerializer(scores_queryset, many=True)
+        return serializer.data
+
     class Meta:
         model = ThesisCriteria
-        fields = '__all__'
+        fields = ['id', 'thesis', 'criteria', 'weight', 'scores']
 
 
 # Bài đăng
 class PostSerializer(serializers.ModelSerializer):
+    like_count = serializers.SerializerMethodField()
+    comment_count = serializers.SerializerMethodField()
+    user = serializers.SerializerMethodField()
+
     class Meta:
         model = Post
-        fields = ['created_date', 'updated_date', 'content', 'user']
+        fields = ['id', 'created_date', 'updated_date', 'content', 'user', 'like_count', 'comment_count']
         read_only_fields = ['user']
+
+    def get_user(self, obj):
+        user_id = obj.user_id
+        user = User.objects.get(pk=user_id)
+        user_serializer = UserSerializer(user)
+        return user_serializer.data
+
+    def get_like_count(self, obj):
+        return obj.like_set.filter(active=True).count()
+
+    def get_comment_count(self, obj):
+        return obj.comment_set.count()
 
 
 class AuthenticatedPost(PostSerializer):
     liked = serializers.SerializerMethodField()
 
     def get_liked(self, post):
-        return post.like_set.filter(active=True).exists()
+        user = self.context['request'].user
+        if user.is_authenticated:
+            return post.like_set.filter(user=user, active=True).exists()
+        return False
 
     class Meta:
         model = PostSerializer.Meta.model
@@ -261,3 +292,15 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['id', 'content', 'created_date', 'user']
+
+
+# Thống kê
+class ThesisStatsSerializer(serializers.Serializer):
+    start_year = serializers.IntegerField()
+    end_year = serializers.IntegerField()
+    avg_score = serializers.FloatField()
+
+
+class MajorThesisCountSerializer(serializers.Serializer):
+    major_name = serializers.CharField()
+    thesis_count = serializers.IntegerField()

@@ -6,4 +6,8 @@ class BasePaginator(pagination.PageNumberPagination):
 
 
 class ThesisPaginator(pagination.PageNumberPagination):
-    page_size = 3
+    page_size = 5
+
+
+class PostCommentPaginator(pagination.PageNumberPagination):
+    page_size = 6
