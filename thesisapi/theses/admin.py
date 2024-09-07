@@ -1,7 +1,7 @@
 from cloudinary.templatetags import cloudinary
 from django.contrib import admin
 from django.contrib.auth.hashers import make_password
-from django.db.models import Avg, Count
+from django.db.models import Avg, Count, Q
 from django.template.response import TemplateResponse
 from django.urls import path, reverse
 from django.utils.html import mark_safe
@@ -26,17 +26,22 @@ class MyAdminSite(admin.AdminSite):
         return custom_urls + urls
 
     def stats(self, request):
-        avg_score_by_school_year = Thesis.objects.values(
-            'school_year__start_year', 'school_year__end_year').annotate(avg_score=Avg('total_score'))
+        avg_score_by_school_year = Thesis.objects.values('school_year__name').annotate(avg_score=Avg('total_score'))
 
         for item in avg_score_by_school_year:
             item['avg_score'] = round(item['avg_score'], 2)
 
         thesis_major_count = Major.objects.annotate(thesis_count=Count('thesis'))
 
+        result = Thesis.objects.values('school_year__name').annotate(
+            pass_count=Count('code', filter=Q(result=True)),
+            fail_count=Count('code', filter=Q(result=False)),
+        ).order_by('school_year__start_year')
+
         return TemplateResponse(request, 'admin/stats.html', {
             'avg_score_by_school_year': avg_score_by_school_year,
-            'thesis_major_count': thesis_major_count
+            'thesis_major_count': thesis_major_count,
+            'result': result
         })
 
 

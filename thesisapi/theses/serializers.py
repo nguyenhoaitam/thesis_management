@@ -1,7 +1,12 @@
 from rest_framework import serializers
 from theses.models import Student, Lecturer, Ministry, User, Position, SchoolYear, Faculty, Major, Council, \
-    CouncilDetail, Thesis, Score, Criteria, ThesisCriteria, Post, Comment
+    CouncilDetail, Thesis, Score, Criteria, ThesisCriteria, Post, Comment, Role
 
+
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Role
+        fields = '__all__'
 
 # Người dùng
 class UserSerializer(serializers.ModelSerializer):

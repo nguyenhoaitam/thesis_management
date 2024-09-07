@@ -127,7 +127,7 @@ class Thesis(models.Model):  # Khóa luận
     result = models.BooleanField(default=False)
     major = models.ForeignKey(Major, on_delete=models.PROTECT)
     school_year = models.ForeignKey(SchoolYear, on_delete=models.PROTECT)
-    council = models.ForeignKey(Council, on_delete=models.PROTECT, null=True, blank=True)
+    council = models.ForeignKey(Council, on_delete=models.SET_NULL, null=True, blank=True)
     lecturers = models.ManyToManyField(Lecturer, null=True, blank=True)  # Giảng viên hướng dẫn khóa luận (Tối đa 2)
 
     def __str__(self):

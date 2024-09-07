@@ -6,13 +6,15 @@
     <div class="stat-container">
         <div class="table-container">
             <table class="table">
-                <tr>
-                    <th>Năm học</th>
-                    <th>Điểm trung bình</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Năm học</th>
+                        <th>Điểm trung bình</th>
+                    </tr>
+                </thead>
                 {% for avg in avg_score_by_school_year %}
                 <tr>
-                    <td>{{ avg.school_year__start_year.year }} - {{ avg.school_year__end_year.year }}</td>
+                    <td>{{ avg.school_year__name }}</td>
                     <td>{{ avg.avg_score }}</td>
                 </tr>
                 {% endfor %}
@@ -25,14 +27,45 @@
 </div>
 
 <div>
+    <h1>THỐNG KÊ SỐ LƯỢNG KHÓA LUẬN ĐẠT QUA TỪNG NĂM</h1>
+    <div class="stat-container">
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Năm học</th>
+                        <th>Số KL đạt</th>
+                        <th>Số KL không đạt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for res in result %}
+                    <tr>
+                        <td>{{ res.school_year__name }}</td>
+                        <td>{{ res.pass_count }}</td>
+                        <td>{{ res.fail_count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="chart-container">
+            <canvas id="myChart03"></canvas>
+        </div>
+    </div>
+</div>
+
+<div>
     <h1 class="margin-top">THỐNG KÊ TẦN XUẤT THAM GIA LÀM KHÓA LUẬN CỦA TỪNG NGHÀNH</h1>
     <div class="stat-container">
         <div class="table-container">
             <table class="table">
-                <tr>
-                    <th>Nghành học</th>
-                    <th>Số khóa luận</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Nghành học</th>
+                        <th>Số khóa luận</th>
+                    </tr>
+                </thead>
                 {% for t in thesis_major_count %}
                 <tr>
                     <td>{{ t.name }}</td>
@@ -50,9 +83,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     let r, g, b
-    let labels = [], counter = [], colors = [], borderColors = [], labels02 = [], counter02 = [], colors02 = [], borderColors02 = []
+    let labels = [], counter = [], colors = [], borderColors = [], labels02 = [], counter02 = [], colors02 = [], borderColors02 = [], labels03 = [], counter03 = [], colors03 = [], borderColors03 = [];
     {% for t in avg_score_by_school_year %}
-    labels.push('{{ t.school_year__start_year.year }} - {{ t.school_year__end_year.year }}')
+    labels.push('{{ t.school_year__name }}')
     counter.push({{ t.avg_score }})
 
     r = parseInt(Math.random()*255)
@@ -73,9 +106,21 @@
     borderColors02.push(`rgba(${r}, ${g}, ${b}, 1)`)
     {% endfor %}
 
+    {% for res in result %}
+    labels03.push('{{ res.school_year__name }}');
+    counter03.push({{ res.pass_count }});
+
+    r = parseInt(Math.random()*255);
+    g = parseInt(Math.random()*255);
+    b = parseInt(Math.random()*255);
+    colors03.push(`rgba(${r}, ${g}, ${b}, 0.2)`);
+    borderColors03.push(`rgba(${r}, ${g}, ${b}, 1)`);
+    {% endfor %}
+
     window.onload = function() {
         const ctx = document.getElementById('myChart');
-        const ctx02 = document.getElementById('myChart02')
+        const ctx02 = document.getElementById('myChart02');
+        const ctx03 = document.getElementById('myChart03');
 
         new Chart(ctx, {
             type: 'line',
@@ -86,6 +131,27 @@
                     data: counter,
                     backgroundColor: colors,
                     borderColor: borderColors,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(ctx03, {
+            type: 'bar',
+            data: {
+                labels: labels03,
+                datasets: [{
+                    label: 'Số khóa luận đạt',
+                    data: counter03,
+                    backgroundColor: colors03,
+                    borderColor: borderColors03,
                     borderWidth: 1
                 }]
             },

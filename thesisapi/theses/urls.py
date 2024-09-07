@@ -4,9 +4,11 @@ from theses import views
 
 r = routers.DefaultRouter()
 
+r.register('roles', views.RoleViewSet, 'roles')
 r.register('users', views.UserViewSet, 'users')  # Người dùng
 r.register('positions', views.PositionViewSet, 'positions')  # Vị trí
 r.register('school_years', views.SchoolYearViewSet, 'school_years')  # Năm học
+r.register('faculties', views.FacultyViewSet, 'faculties')
 r.register('majors', views.MajorViewSet, 'majors')  # Ngành
 r.register('lecturers', views.LecturerViewSet, 'lecturers')  # Giảng viên
 r.register('students', views.StudentViewSet, 'students')  # Sinh viên

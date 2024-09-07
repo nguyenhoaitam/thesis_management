@@ -23,6 +23,11 @@ from django.conf import settings
 from theses.signals import update_total_score
 
 
+class RoleViewSet(viewsets.ModelViewSet):
+    queryset = Role.objects.all()
+    serializer_class = serializers.RoleSerializer
+
+
 # Người dùng
 class UserViewSet(viewsets.ViewSet, generics.CreateAPIView):
     queryset = User.objects.filter(is_active=True)
@@ -78,6 +83,12 @@ class SchoolYearViewSet(viewsets.ViewSet, generics.ListAPIView):
         return queryset
 
 
+class FacultyViewSet(viewsets.ModelViewSet):
+    queryset = Faculty.objects.all()
+    serializer_class = serializers.FacultySerializer
+    parser_classes = [parsers.MultiPartParser]
+
+
 # Ngành học (Quản lý trong Admin, Giáo vụ)
 class MajorViewSet(viewsets.ViewSet, generics.ListAPIView):
     queryset = Major.objects.all()
@@ -100,11 +111,11 @@ class MajorViewSet(viewsets.ViewSet, generics.ListAPIView):
 
 
 # Giảng viên
-class LecturerViewSet(viewsets.ViewSet, generics.ListAPIView):
+class LecturerViewSet(viewsets.ModelViewSet, generics.ListAPIView):
     queryset = Lecturer.objects.all()
     serializer_class = serializers.LecturerSerializer
     pagination_class = paginators.BasePaginator
-    parser_classes = [parsers.MultiPartParser]
+    parser_classes = [parsers.MultiPartParser, ]
 
     def get_queryset(self):
         queryset = self.queryset
@@ -150,7 +161,7 @@ class LecturerViewSet(viewsets.ViewSet, generics.ListAPIView):
 
 
 # Sinh Viên
-class StudentViewSet(viewsets.ViewSet, generics.ListAPIView):
+class StudentViewSet(viewsets.ModelViewSet, generics.ListAPIView):
     queryset = Student.objects.all()
     serializer_class = serializers.StudentSerializer
     pagination_class = paginators.BasePaginator
@@ -199,7 +210,7 @@ class CouncilViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIV
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # Cập nhật trường is_lock của Council
+    # Cập nhật trường lock
     @action(methods=['post'], url_path='update_lock', detail=True)
     def update_lock(self, request, pk=None):
         council = self.get_object()
@@ -207,10 +218,24 @@ class CouncilViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIV
         council.is_lock = not council.is_lock
         council.save()
 
+        # if not old_lock_status and council.is_lock:
+        #     for council_detail in council.councildetail_set.all():
+        #         for student in council_detail.lecturer.thesis_set.first().student_set.all():
+        #             self.send_score_notification_email(student, council_detail.lecturer.thesis_set.first().total_score)
+
         if not old_lock_status and council.is_lock:
             for council_detail in council.councildetail_set.all():
-                for student in council_detail.lecturer.thesis_set.first().student_set.all():
-                    self.send_score_notification_email(student, council_detail.lecturer.thesis_set.first().total_score)
+                theses = council_detail.lecturer.thesis_set.all()
+                if not theses.exists():
+                    continue
+
+                for thesis in theses:
+                    students = thesis.student_set.all()
+                    if not students.exists():
+                        continue
+
+                    for student in students:
+                        self.send_score_notification_email(student, thesis.total_score)
 
         return Response({'is_lock': council.is_lock}, status=status.HTTP_200_OK)
 
@@ -277,11 +302,15 @@ class CouncilViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIV
             return Response({'Thông báo': f'Khóa luận {thesis_code} đã được gán hội đồng!'},
                             status=status.HTTP_400_BAD_REQUEST)
 
-        thesis_lecturers = thesis.lecturers.all()
-        council_lecturers = council.councildetail_set.values_list('lecturer', flat=True)
-        if any(lecturer.user_id in council_lecturers for lecturer in thesis_lecturers):
-            return Response({'Thông báo': 'Hội đồng có giảng viên là giảng viên hướng dẫn khóa luận này!'},
-                            status=status.HTTP_400_BAD_REQUEST)
+        # thesis_lecturers = thesis.lecturers.all()
+        # council_lecturers = council.councildetail_set.values_list('lecturer', flat=True)
+        # overlapping_lecturers = [lecturer for lecturer in thesis_lecturers if lecturer.user_id in council_lecturers]
+
+        # if overlapping_lecturers:
+        #     lecturer_names = ', '.join([lecturer.full_name for lecturer in overlapping_lecturers])
+        #     return Response(
+        #         {'Thông báo': f'Hội đồng có giảng viên {lecturer_names} là giảng viên hướng dẫn khóa luận này!'},
+        #         status=status.HTTP_400_BAD_REQUEST)
 
         thesis.council = council
         thesis.save()
@@ -359,9 +388,10 @@ class CouncilDetailViewSet(viewsets.ViewSet, generics.DestroyAPIView):
         except Lecturer.DoesNotExist:
             return Response({'Thông báo': 'Giảng viên không tồn tại!'}, status=status.HTTP_404_NOT_FOUND)
 
-        # Kiểm tra nếu giảng viên đã có một chức vụ trong hội đồng này
-        if council_details.filter(lecturer_id=lecturer_id).exists():
-            return Response({'Thông báo': 'Giảng viên này đã giữ một chức vụ khác trong hội đồng!'},
+        if council.councildetail_set.filter(lecturer_id=lecturer_id).exists():
+            existing_detail = council.councildetail_set.get(lecturer_id=lecturer_id)
+            lecturer_name = existing_detail.lecturer.full_name
+            return Response({'Thông báo': f'Giảng viên {lecturer_name} đã giữ một chức vụ khác trong hội đồng!'},
                             status=status.HTTP_400_BAD_REQUEST)
 
         if request.method.__eq__('POST'):
@@ -408,7 +438,7 @@ class CouncilDetailViewSet(viewsets.ViewSet, generics.DestroyAPIView):
 
 # Khóa luận
 class ThesisViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.RetrieveAPIView, generics.DestroyAPIView):
-    queryset = Thesis.objects.prefetch_related('lecturers').all().order_by('code')
+    queryset = Thesis.objects.prefetch_related('lecturers').all().order_by('-code')
     serializer_class = serializers.ThesisSerializer
     parser_classes = [parsers.MultiPartParser, ]
     pagination_class = paginators.ThesisPaginator
@@ -459,8 +489,12 @@ class ThesisViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Retri
         except (Thesis.DoesNotExist, Lecturer.DoesNotExist):
             return Response({"Thông báo": "Khóa luận hoặc giảng viên không tồn tại!"}, status=status.HTTP_404_NOT_FOUND)
 
+        if lecturer.faculty != thesis.major.faculty:
+            return Response({"Thông báo": f"Khoa của giảng viên {lecturer.faculty.name} và khoa của khóa luận không cùng khoa!"},
+                            status=status.HTTP_400_BAD_REQUEST)
+
         if lecturer in thesis.lecturers.all():
-            return Response({"Thông báo": "Giảng viên đã có trong danh sách hướng dẫn!"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"Thông báo": f"Giảng viên {lecturer.full_name} đã có trong danh sách hướng dẫn!"}, status=status.HTTP_400_BAD_REQUEST)
 
         thesis.lecturers.add(lecturer)
         thesis.save()
@@ -479,11 +513,11 @@ class ThesisViewSet(viewsets.ViewSet, generics.ListCreateAPIView, generics.Retri
             return Response({"Thông báo": "Khóa luận hoặc sinh viên không tồn tại!"}, status=status.HTTP_404_NOT_FOUND)
 
         if student.thesis:
-            return Response({"Thông báo": "Sinh viên đã có khóa luận!"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"Thông báo": f"Sinh viên {student.full_name} đã có khóa luận!"}, status=status.HTTP_400_BAD_REQUEST)
 
         # Kiểm tra ngành của sinh viên phải cùng với ngành của khóa luận
         if student.major != thesis.major:
-            return Response({'Thông báo': 'Không thể thêm do sinh viên và khóa luận không cùng ngành!'},
+            return Response({'Thông báo': f'Không thể thêm do sinh viên {student.full_name} và khóa luận không cùng ngành!'},
                             status=status.HTTP_400_BAD_REQUEST)
 
         student.thesis = thesis
@@ -726,6 +760,10 @@ class ScoreViewSet(viewsets.ViewSet, generics.CreateAPIView):
         except ThesisCriteria.DoesNotExist:
             return Response({"Thông báo": "Tiêu chí khóa luận không tồn tại!"}, status=status.HTTP_404_NOT_FOUND)
 
+        if not thesis_criteria.thesis.report_file:
+            return Response({"Thông báo": "Khóa luận chưa có báo cáo, không thể chấm điểm!"},
+                            status=status.HTTP_400_BAD_REQUEST)
+
         if not hasattr(user, 'lecturer'):
             return Response({"Thông báo": "Bạn không phải là giảng viên!"}, status=status.HTTP_403_FORBIDDEN)
 
@@ -736,7 +774,8 @@ class ScoreViewSet(viewsets.ViewSet, generics.CreateAPIView):
                             status=status.HTTP_403_FORBIDDEN)
 
         if thesis_criteria.thesis.council.is_lock:
-            return Response({"Thông báo": "Hội đồng đã bị khóa và không thể chấm hay chỉnh sửa điểm!"},
+            council_name = thesis_criteria.thesis.council.name
+            return Response({"Thông báo": f"Hội đồng {council_name} đã bị khóa và không thể chấm hay chỉnh sửa điểm!"},
                             status=status.HTTP_403_FORBIDDEN)
 
         if not (0 <= float(score_number) <= 10):
@@ -744,7 +783,10 @@ class ScoreViewSet(viewsets.ViewSet, generics.CreateAPIView):
 
         existing_score = Score.objects.filter(thesis_criteria=thesis_criteria, council_detail=council_detail).first()
         if existing_score:
-            return Response({"Thông báo": "Bạn đã chấm điểm cho tiêu chí này rồi!"}, status=status.HTTP_400_BAD_REQUEST)
+            criteria_name = thesis_criteria.criteria.name
+            return Response(
+                {"Thông báo": f"Bạn đã chấm điểm cho tiêu chí {criteria_name} rồi!"},
+                status=status.HTTP_400_BAD_REQUEST)
 
         data = {
             'thesis_criteria': thesis_criteria_id,
@@ -758,7 +800,7 @@ class ScoreViewSet(viewsets.ViewSet, generics.CreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def update(self, request, pk=None):
+    def partial_update (self, request, pk=None):
         user = request.user
 
         # Extract and validate data from request
@@ -828,7 +870,9 @@ class ThesisCriteriaViewSet(viewsets.ViewSet, generics.ListAPIView):
             return Response({'Thông báo': 'Không tìm thấy tiêu chí!'}, status=status.HTTP_404_NOT_FOUND)
 
         if ThesisCriteria.objects.filter(thesis=thesis, criteria=criteria).exists():
-            return Response({'Thông báo': 'Tiêu chí này đã được gán cho khóa luận!'}, status=status.HTTP_400_BAD_REQUEST)
+            criteria_name = criteria.name
+            return Response({'Thông báo': f'Tiêu chí "{criteria_name}" đã được gán cho khóa luận!'},
+                            status=status.HTTP_400_BAD_REQUEST)
 
         thesis_criteria = ThesisCriteria(thesis=thesis, criteria=criteria, weight=weight)
         thesis_criteria.save()

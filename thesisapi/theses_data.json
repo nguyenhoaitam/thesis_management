@@ -32,7 +32,7 @@
         "pk": 1,
         "fields": {
             "password": "pbkdf2_sha256$720000$wM2yKrx2Fq3qXrszGsgIPY$JFGKe8iZJj2Aprs7wn6QTbL70WG84DAUY1Pt8MfGgqs=",
-            "last_login": "2024-06-18T18:45:01.530Z",
+            "last_login": "2024-06-20T16:46:49.889Z",
             "is_superuser": true,
             "username": "admin",
             "first_name": "",
@@ -53,7 +53,7 @@
         "model": "theses.user",
         "pk": 2,
         "fields": {
-            "password": "pbkdf2_sha256$720000$KX9HutZS7CZyZbscxe7FRj$4SWnIYRnJgCna9vBs5SPfRLuLsKeJ0FG9sSKpBFjM1s=",
+            "password": "pbkdf2_sha256$720000$zv9U2cqJRze23RLErVJrNS$p6rmrPcCfe3I7QoW8GZjsJW8s5OQNya55ahnTD4Hg5U=",
             "last_login": null,
             "is_superuser": false,
             "username": "thaomysv",
@@ -107,7 +107,7 @@
             "is_staff": false,
             "is_active": true,
             "date_joined": "2024-05-23T06:28:47Z",
-            "avatar": "image/upload/v1713421473/user.png",
+            "avatar": "image/upload/v1718862196/hhbsnqnjlykjvlcnpwtf.jpg",
             "phone": "0786896036",
             "gender": "Nam",
             "role": "lecturer",
@@ -151,7 +151,7 @@
             "is_staff": false,
             "is_active": true,
             "date_joined": "2024-05-23T06:41:38Z",
-            "avatar": "image/upload/v1713421473/user.png",
+            "avatar": "image/upload/v1718893642/knwaweifwxf6rkzzfymb.jpg",
             "phone": "0394873577",
             "gender": "Nữ",
             "role": "lecturer",
@@ -273,7 +273,7 @@
         "model": "theses.user",
         "pk": 39,
         "fields": {
-            "password": "pbkdf2_sha256$720000$jClAdoIiDSKyYXy3oFKFeX$DFFj0ElgfoLqodlLiFDVLCyoIWtZf8SRZCYq3keDN6A=",
+            "password": "pbkdf2_sha256$720000$ngIac69jDlQOUkhNUspE10$wl/p+S9eRO+ek47WLsUlXscu0Kz4dprEUln5ST7dkBM=",
             "last_login": null,
             "is_superuser": false,
             "username": "hoaitamgv",
@@ -622,6 +622,160 @@
         }
     },
     {
+        "model": "theses.user",
+        "pk": 56,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$WjGIxyVAHx1va0ZPJcS89V$zJhehskohFhsisAXQ2Ac2JzX3NUQ6/3wgnkO7XBr4S8=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "sinhvien",
+            "first_name": "Lê",
+            "last_name": "Nhân",
+            "email": "2151050293nhan@ou.edu.vn",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-06-20T05:33:05Z",
+            "avatar": "image/upload/v1718861619/pukxtoysmop1w1mj3aty.png",
+            "phone": "0786896036",
+            "gender": "Nam",
+            "role": "student",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "pk": 57,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$BCQEAQgpbqkAJxU4GtaOYy$EGfjLLmMvwBNPwGcgdmLKPRtieYAc35BDqVkmT/wW2U=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "baoanhgv",
+            "first_name": "Nguyễn",
+            "last_name": "Anh",
+            "email": "2151050293nhan@ou.edu.vn",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-06-20T14:18:47Z",
+            "avatar": "image/upload/v1718893199/wcdcan1gcsrlpwffgg7o.png",
+            "phone": "0786896036",
+            "gender": "Nữ",
+            "role": "lecturer",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "pk": 58,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$KWf6g3euUUd1NQF3coRhug$Ri+pi2wjoY0LIKfMygFIgfwEeWCiYUQ6hgkVmOBBMqA=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "thuhuonggv",
+            "first_name": "Nguyễn",
+            "last_name": "Hương",
+            "email": "hoaitam8998@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-06-20T14:20:01Z",
+            "avatar": "image/upload/v1718893248/ughjyg8asradm1oodhmp.png",
+            "phone": "0786896036",
+            "gender": "Nữ",
+            "role": "lecturer",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "pk": 59,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$Qjjhguwx0jYNnB0VQaY9EP$GWQCXWmVO8XsVU/hcQZgeqt/bFJK2YYJIFEWkDX0ilg=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "huutaigv",
+            "first_name": "Nguyễn",
+            "last_name": "Tài",
+            "email": "bibi0110990@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-06-20T14:22:23Z",
+            "avatar": "image/upload/v1718893406/nexkegddb7l9wbwgfpu6.png",
+            "phone": "0786896777",
+            "gender": "Nam",
+            "role": "lecturer",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "pk": 60,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$NL1hncd2bCrvJ318grkphJ$F9/hilBp4fgXQ9ZAKOhlFYmScTBxMWnZED0dSpHiqpg=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "vanhunggv",
+            "first_name": "Nguyễn",
+            "last_name": "Hùng",
+            "email": "bibi0110990@gmail.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-06-20T14:23:27Z",
+            "avatar": "image/upload/v1718895046/k5ygf1nceowgy0mzomaw.jpg",
+            "phone": "0786896036",
+            "gender": "Nam",
+            "role": "lecturer",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "pk": 61,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$zmhiluQ4toQnvhz8TejSth$tQ8YI67jQVgbhuXT4TkZnsH3xxBbu4xDYcrSymg104Y=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "khanhlysv",
+            "first_name": "Bùi",
+            "last_name": "Ly",
+            "email": "2151050293nhan@ou.edu.vn",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-06-20T16:55:30Z",
+            "avatar": "image/upload/v1718902566/cc1gf8z8ucavmjcwq8uo.png",
+            "phone": "0786896036",
+            "gender": "Nữ",
+            "role": "student",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "theses.user",
+        "pk": 62,
+        "fields": {
+            "password": "pbkdf2_sha256$720000$Nv6yypfCfx8vxmFNdTiSME$y5pYvVbHakDluCmgKHw6Zym4dy/xaW1SwFuAMXhKBlE=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "phuonguyensv",
+            "first_name": "Nguyễn",
+            "last_name": "Uyên",
+            "email": "2151050293nhan@ou.edu.vn",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-06-20T16:56:06Z",
+            "avatar": "image/upload/v1718902610/ue91kfoxmt1x1cgnlzuh.png",
+            "phone": "0786896036",
+            "gender": "Nữ",
+            "role": "student",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
         "model": "theses.ministry",
         "pk": 14,
         "fields": {
@@ -965,7 +1119,7 @@
             "full_name": "Nguyễn Thu Phương",
             "birthday": "1994-06-29",
             "address": "Bạc Liêu",
-            "faculty": "QTKD"
+            "faculty": "NN"
         }
     },
     {
@@ -976,7 +1130,7 @@
             "full_name": "Phạm Hoàng Yến",
             "birthday": "1992-10-11",
             "address": "Đồng Tháp",
-            "faculty": "QTKD"
+            "faculty": "NN"
         }
     },
     {
@@ -987,7 +1141,7 @@
             "full_name": "Vũ Bình An",
             "birthday": "1998-06-03",
             "address": "TP Hồ Chí Minh",
-            "faculty": "L"
+            "faculty": "CNTT"
         }
     },
     {
@@ -998,7 +1152,51 @@
             "full_name": "Nguyễn Quang Minh",
             "birthday": "1990-06-03",
             "address": "Tây Ninh",
-            "faculty": "L"
+            "faculty": "CNTT"
+        }
+    },
+    {
+        "model": "theses.lecturer",
+        "pk": 57,
+        "fields": {
+            "code": "GV011",
+            "full_name": "Nguyễn Bảo Anh",
+            "birthday": "1997-06-20",
+            "address": "Kiêng Giang",
+            "faculty": "CNTT"
+        }
+    },
+    {
+        "model": "theses.lecturer",
+        "pk": 58,
+        "fields": {
+            "code": "GV010",
+            "full_name": "Nguyễn Thu Hương",
+            "birthday": "1999-06-02",
+            "address": "Kiêng Giang",
+            "faculty": "CNTT"
+        }
+    },
+    {
+        "model": "theses.lecturer",
+        "pk": 59,
+        "fields": {
+            "code": "GV012",
+            "full_name": "Nguyễn Hữu Tài",
+            "birthday": "1990-06-20",
+            "address": "TP. Hồ Chí Minh",
+            "faculty": "NN"
+        }
+    },
+    {
+        "model": "theses.lecturer",
+        "pk": 60,
+        "fields": {
+            "code": "GV013",
+            "full_name": "Nguyễn Văn Hùng",
+            "birthday": "1990-06-20",
+            "address": "TP. Hồ Chí Minh",
+            "faculty": "NN"
         }
     },
     {
@@ -1007,7 +1205,7 @@
         "fields": {
             "name": "Hội đồng 1",
             "description": "Hội đồng khóa 2021 - Khoa Công nghệ thông tin",
-            "is_lock": false
+            "is_lock": true
         }
     },
     {
@@ -1034,7 +1232,7 @@
         "fields": {
             "name": "Hội đồng 4",
             "description": "Hội đồng khóa 2021 -  Khoa Ngoại ngữ",
-            "is_lock": false
+            "is_lock": true
         }
     },
     {
@@ -1146,6 +1344,60 @@
         }
     },
     {
+        "model": "theses.councildetail",
+        "pk": 23,
+        "fields": {
+            "lecturer": 13,
+            "council": 1,
+            "position": 1
+        }
+    },
+    {
+        "model": "theses.councildetail",
+        "pk": 24,
+        "fields": {
+            "lecturer": 15,
+            "council": 1,
+            "position": 2
+        }
+    },
+    {
+        "model": "theses.councildetail",
+        "pk": 25,
+        "fields": {
+            "lecturer": 39,
+            "council": 1,
+            "position": 3
+        }
+    },
+    {
+        "model": "theses.councildetail",
+        "pk": 26,
+        "fields": {
+            "lecturer": 53,
+            "council": 4,
+            "position": 1
+        }
+    },
+    {
+        "model": "theses.councildetail",
+        "pk": 27,
+        "fields": {
+            "lecturer": 59,
+            "council": 4,
+            "position": 2
+        }
+    },
+    {
+        "model": "theses.councildetail",
+        "pk": 28,
+        "fields": {
+            "lecturer": 60,
+            "council": 4,
+            "position": 3
+        }
+    },
+    {
         "model": "theses.thesis",
         "pk": "KL001",
         "fields": {
@@ -1153,7 +1405,7 @@
             "start_date": "2024-04-18",
             "end_date": "2024-07-18",
             "report_file": "https://drive.google.com/file/d/1qQ-Jlz_VCojgDp2-Ch9AenTHzJRyQ8tf/view?usp=sharing",
-            "total_score": 8.83,
+            "total_score": 9.17,
             "result": true,
             "major": "CNTT",
             "school_year": 3,
@@ -1167,7 +1419,7 @@
         "model": "theses.thesis",
         "pk": "KL002",
         "fields": {
-            "name": "Xu hướng MKT trong năm 2025",
+            "name": "Ứng dụng Digital marketing vào quảng bá du lịch cộng đồng tại làng Cổ Phước Tích",
             "start_date": "2024-05-18",
             "end_date": "2024-07-30",
             "report_file": "",
@@ -1176,54 +1428,6 @@
             "major": "MKT",
             "school_year": 1,
             "council": 7,
-            "lecturers": []
-        }
-    },
-    {
-        "model": "theses.thesis",
-        "pk": "KL003",
-        "fields": {
-            "name": "Nâng cao chất lượng nguồn nhân lực cho các Khu công nghiệp tỉnh Bắc Ninh đến 2027",
-            "start_date": "2024-05-06",
-            "end_date": "2024-09-24",
-            "report_file": "",
-            "total_score": 0.0,
-            "result": false,
-            "major": "MKT",
-            "school_year": 3,
-            "council": null,
-            "lecturers": []
-        }
-    },
-    {
-        "model": "theses.thesis",
-        "pk": "KL004",
-        "fields": {
-            "name": "Ứng dụng Digital marketing vào quảng bá du lịch cộng đồng tại làng Cổ Phước Tích",
-            "start_date": "2024-02-13",
-            "end_date": "2024-05-26",
-            "report_file": "",
-            "total_score": 0.0,
-            "result": false,
-            "major": "MKT",
-            "school_year": 3,
-            "council": null,
-            "lecturers": []
-        }
-    },
-    {
-        "model": "theses.thesis",
-        "pk": "KL005",
-        "fields": {
-            "name": "Giải pháp mở rộng thị trường tiêu thụ sản phẩm tại công ty TNHH Thương mại dịch vụ tổng hợp",
-            "start_date": "2024-06-06",
-            "end_date": "2024-08-01",
-            "report_file": "",
-            "total_score": 0.0,
-            "result": false,
-            "major": "MKT",
-            "school_year": 2,
-            "council": null,
             "lecturers": []
         }
     },
@@ -1239,7 +1443,7 @@
             "result": false,
             "major": "CNTT",
             "school_year": 3,
-            "council": null,
+            "council": 2,
             "lecturers": []
         }
     },
@@ -1251,12 +1455,15 @@
             "start_date": "2024-05-01",
             "end_date": "2024-09-19",
             "report_file": "",
-            "total_score": 0.0,
-            "result": false,
+            "total_score": 8.6,
+            "result": true,
             "major": "CNTT",
             "school_year": 2,
-            "council": null,
-            "lecturers": []
+            "council": 1,
+            "lecturers": [
+                51,
+                54
+            ]
         }
     },
     {
@@ -1266,13 +1473,15 @@
             "name": "Hệ thống quản lý thiết bị dựa trên giải pháp sử dụng RFID",
             "start_date": "2024-05-31",
             "end_date": "2024-08-31",
-            "report_file": "",
-            "total_score": 0.0,
-            "result": false,
+            "report_file": "https://docs.google.com/document/d/1WMkDOcfojzkTmCp9pXBk8p0vyTsFpo7B_yEWOdBTFhA/edit?usp=drivesdk",
+            "total_score": 8.67,
+            "result": true,
             "major": "CNTT",
             "school_year": 2,
-            "council": null,
-            "lecturers": []
+            "council": 4,
+            "lecturers": [
+                13
+            ]
         }
     },
     {
@@ -1282,22 +1491,6 @@
             "name": "Cán cân thanh toán quốc tế – Những vấn đề pháp lý cần lưu ý",
             "start_date": "2024-05-15",
             "end_date": "2024-07-18",
-            "report_file": "",
-            "total_score": 0.0,
-            "result": false,
-            "major": "LKT",
-            "school_year": 3,
-            "council": null,
-            "lecturers": []
-        }
-    },
-    {
-        "model": "theses.thesis",
-        "pk": "KL010",
-        "fields": {
-            "name": "Khó khăn của Việt Nam trong điều tra và tiến hành các biện pháp khắc phục thương mại và hướng giải quyết",
-            "start_date": "2024-05-21",
-            "end_date": "2024-08-17",
             "report_file": "",
             "total_score": 0.0,
             "result": false,
@@ -1336,7 +1529,9 @@
             "major": "NNA",
             "school_year": 1,
             "council": null,
-            "lecturers": []
+            "lecturers": [
+                60
+            ]
         }
     },
     {
@@ -1367,22 +1562,6 @@
             "result": false,
             "major": "KET",
             "school_year": 3,
-            "council": null,
-            "lecturers": []
-        }
-    },
-    {
-        "model": "theses.thesis",
-        "pk": "KL015",
-        "fields": {
-            "name": "Ứng dụng phân loại chi phí theo cách ứng xử để lập dự toán chi phí tại Doanh nghiệp sản xuất A.",
-            "start_date": "2024-06-16",
-            "end_date": "2024-10-16",
-            "report_file": "",
-            "total_score": 0.0,
-            "result": false,
-            "major": "KET",
-            "school_year": 2,
             "council": null,
             "lecturers": []
         }
@@ -1474,7 +1653,7 @@
             "address": "Tây Ninh",
             "gpa": 3.0,
             "major": "CNTT",
-            "thesis": "KL001"
+            "thesis": "KL008"
         }
     },
     {
@@ -1500,7 +1679,7 @@
             "address": "TP Hồ Chí Minh",
             "gpa": 3.35,
             "major": "NNA",
-            "thesis": null
+            "thesis": "KL012"
         }
     },
     {
@@ -1525,7 +1704,7 @@
             "birthday": "2003-05-02",
             "address": "Tây Ninh",
             "gpa": 3.5,
-            "major": "LGT",
+            "major": "NNA",
             "thesis": null
         }
     },
@@ -1539,7 +1718,7 @@
             "address": "Tây Ninh",
             "gpa": 3.8,
             "major": "CNTT",
-            "thesis": null
+            "thesis": "KL006"
         }
     },
     {
@@ -1551,7 +1730,7 @@
             "birthday": "2003-06-11",
             "address": "Kiên Giang",
             "gpa": 3.2,
-            "major": "L",
+            "major": "CNTT",
             "thesis": null
         }
     },
@@ -1577,7 +1756,7 @@
             "birthday": "2003-06-20",
             "address": "Tiền Giang",
             "gpa": 3.4,
-            "major": "L",
+            "major": "CNTT",
             "thesis": null
         }
     },
@@ -1590,7 +1769,7 @@
             "birthday": "2003-08-09",
             "address": "Long An",
             "gpa": 3.3,
-            "major": "MKT",
+            "major": "KHMT",
             "thesis": null
         }
     },
@@ -1603,7 +1782,7 @@
             "birthday": "2003-02-20",
             "address": "Đồng Nai",
             "gpa": 2.9,
-            "major": "MKT",
+            "major": "KHMT",
             "thesis": null
         }
     },
@@ -1616,7 +1795,7 @@
             "birthday": "2003-06-18",
             "address": "TP Hồ Chí Minh",
             "gpa": 4.0,
-            "major": "LGT",
+            "major": "NNA",
             "thesis": null
         }
     },
@@ -1643,6 +1822,32 @@
             "address": "TP Hồ Chí Minh",
             "gpa": 3.0,
             "major": "KHMT",
+            "thesis": null
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 61,
+        "fields": {
+            "code": "SV016",
+            "full_name": "Bùi Khánh Ly",
+            "birthday": "2003-06-20",
+            "address": "Kiêng Giang",
+            "gpa": 4.0,
+            "major": "CNTT",
+            "thesis": null
+        }
+    },
+    {
+        "model": "theses.student",
+        "pk": 62,
+        "fields": {
+            "code": "SV017",
+            "full_name": "Nguyễn Ngọc Phương Uyên",
+            "birthday": "2003-06-20",
+            "address": "Kiêng Giang",
+            "gpa": 3.0,
+            "major": "NNA",
             "thesis": null
         }
     },
@@ -1753,6 +1958,96 @@
         }
     },
     {
+        "model": "theses.thesiscriteria",
+        "pk": 13,
+        "fields": {
+            "thesis": "KL007",
+            "criteria": 1,
+            "weight": 0.4
+        }
+    },
+    {
+        "model": "theses.thesiscriteria",
+        "pk": 14,
+        "fields": {
+            "thesis": "KL007",
+            "criteria": 2,
+            "weight": 0.4
+        }
+    },
+    {
+        "model": "theses.thesiscriteria",
+        "pk": 15,
+        "fields": {
+            "thesis": "KL007",
+            "criteria": 3,
+            "weight": 0.2
+        }
+    },
+    {
+        "model": "theses.thesiscriteria",
+        "pk": 16,
+        "fields": {
+            "thesis": "KL006",
+            "criteria": 1,
+            "weight": 0.4
+        }
+    },
+    {
+        "model": "theses.thesiscriteria",
+        "pk": 17,
+        "fields": {
+            "thesis": "KL006",
+            "criteria": 2,
+            "weight": 0.5
+        }
+    },
+    {
+        "model": "theses.thesiscriteria",
+        "pk": 18,
+        "fields": {
+            "thesis": "KL006",
+            "criteria": 4,
+            "weight": 0.1
+        }
+    },
+    {
+        "model": "theses.thesiscriteria",
+        "pk": 19,
+        "fields": {
+            "thesis": "KL008",
+            "criteria": 1,
+            "weight": 0.2
+        }
+    },
+    {
+        "model": "theses.thesiscriteria",
+        "pk": 20,
+        "fields": {
+            "thesis": "KL008",
+            "criteria": 2,
+            "weight": 0.3
+        }
+    },
+    {
+        "model": "theses.thesiscriteria",
+        "pk": 21,
+        "fields": {
+            "thesis": "KL008",
+            "criteria": 3,
+            "weight": 0.4
+        }
+    },
+    {
+        "model": "theses.thesiscriteria",
+        "pk": 22,
+        "fields": {
+            "thesis": "KL008",
+            "criteria": 4,
+            "weight": 0.1
+        }
+    },
+    {
         "model": "theses.score",
         "pk": 16,
         "fields": {
@@ -1803,7 +2098,196 @@
         "fields": {
             "thesis_criteria": 12,
             "council_detail": 22,
+            "score_number": 10.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 22,
+        "fields": {
+            "thesis_criteria": 13,
+            "council_detail": 23,
+            "score_number": 10.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 23,
+        "fields": {
+            "thesis_criteria": 14,
+            "council_detail": 23,
+            "score_number": 9.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 24,
+        "fields": {
+            "thesis_criteria": 15,
+            "council_detail": 23,
             "score_number": 8.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 25,
+        "fields": {
+            "thesis_criteria": 13,
+            "council_detail": 25,
+            "score_number": 9.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 26,
+        "fields": {
+            "thesis_criteria": 14,
+            "council_detail": 25,
+            "score_number": 7.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 27,
+        "fields": {
+            "thesis_criteria": 15,
+            "council_detail": 25,
+            "score_number": 9.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 28,
+        "fields": {
+            "thesis_criteria": 13,
+            "council_detail": 24,
+            "score_number": 8.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 29,
+        "fields": {
+            "thesis_criteria": 14,
+            "council_detail": 24,
+            "score_number": 9.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 30,
+        "fields": {
+            "thesis_criteria": 15,
+            "council_detail": 24,
+            "score_number": 8.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 55,
+        "fields": {
+            "thesis_criteria": 19,
+            "council_detail": 28,
+            "score_number": 9.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 56,
+        "fields": {
+            "thesis_criteria": 20,
+            "council_detail": 28,
+            "score_number": 7.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 57,
+        "fields": {
+            "thesis_criteria": 21,
+            "council_detail": 28,
+            "score_number": 9.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 58,
+        "fields": {
+            "thesis_criteria": 22,
+            "council_detail": 28,
+            "score_number": 8.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 59,
+        "fields": {
+            "thesis_criteria": 19,
+            "council_detail": 26,
+            "score_number": 9.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 60,
+        "fields": {
+            "thesis_criteria": 20,
+            "council_detail": 26,
+            "score_number": 10.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 61,
+        "fields": {
+            "thesis_criteria": 21,
+            "council_detail": 26,
+            "score_number": 8.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 62,
+        "fields": {
+            "thesis_criteria": 22,
+            "council_detail": 26,
+            "score_number": 7.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 63,
+        "fields": {
+            "thesis_criteria": 19,
+            "council_detail": 27,
+            "score_number": 9.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 64,
+        "fields": {
+            "thesis_criteria": 20,
+            "council_detail": 27,
+            "score_number": 9.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 65,
+        "fields": {
+            "thesis_criteria": 21,
+            "council_detail": 27,
+            "score_number": 9.0
+        }
+    },
+    {
+        "model": "theses.score",
+        "pk": 66,
+        "fields": {
+            "thesis_criteria": 22,
+            "council_detail": 27,
+            "score_number": 9.0
         }
     },
     {
@@ -1926,6 +2410,18 @@
             "user": 14,
             "post": 6,
             "content": "@all"
+        }
+    },
+    {
+        "model": "theses.comment",
+        "pk": 12,
+        "fields": {
+            "created_date": "2024-06-20T06:39:31.634Z",
+            "updated_date": "2024-06-20T06:39:48.133Z",
+            "active": true,
+            "user": 13,
+            "post": 4,
+            "content": "Dạ tiểu đội trưởng !!"
         }
     }
 ]
